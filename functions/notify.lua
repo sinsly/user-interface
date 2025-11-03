@@ -1,3 +1,13 @@
+--[[
+
+	Usage Example:
+	X: Text | Y: Seconds
+
+	local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/sinsly/user-interface/refs/heads/main/functions/notify.lua"))()
+	Notify.New("X", Y)
+
+]]
+
 local Notif = {}
 
 local CoreGUI = game:GetService("CoreGui")
