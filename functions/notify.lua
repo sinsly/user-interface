@@ -100,6 +100,8 @@ function Notif.New(text, timee)
     text_label.BackgroundTransparency = 1
     text_label.Size = UDim2.new(0, 0, 0, 24)
     text_label.Visible = true
+    text_label.TextXAlignment = Enum.TextXAlignment.Center  -- Center horizontally
+    text_label.TextYAlignment = Enum.TextYAlignment.Center  -- Center vertically
     text_label.Parent = frame_3
 
     local uipadding_2 = Instance.new("UIPadding")
