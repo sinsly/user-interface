@@ -13,19 +13,16 @@ function Console:Window(consoledebugger)
     local Title = tostring(consoledebugger.Title or "Console")
     local GuiPosition = consoledebugger.Position or UDim2.new(0.5, -300, 0.5, -250)
     local DragSpeed = consoledebugger.DragSpeed or 8
-    local autoDeleteLogs = false -- toggleable
+    local autoDeleteLogs = false
 
-    -- Remove old console
     local oldGui = CoreGUI:FindFirstChild("Console")
     if oldGui then oldGui:Destroy() end
 
-    -- ScreenGui
     local ConsoleGui = Instance.new("ScreenGui")
     ConsoleGui.Name = "Console"
     ConsoleGui.Parent = CoreGUI
     ConsoleGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-    -- Background
     local background = Instance.new("Frame")
     background.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     background.BorderSizePixel = 0
@@ -43,10 +40,9 @@ function Console:Window(consoledebugger)
     uistroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     uistroke.Parent = background
 
-    -- Top Bar Frame
     local topBar = Instance.new("Frame")
     topBar.Name = "TopBar"
-    topBar.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    topBar.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
     topBar.BorderSizePixel = 0
     topBar.Size = UDim2.new(1, 0, 0, 40)
     topBar.Position = UDim2.new(0, 0, 0, 0)
@@ -56,7 +52,6 @@ function Console:Window(consoledebugger)
     topBarCorner.CornerRadius = UDim.new(0, 6)
     topBarCorner.Parent = topBar
 
-    -- Console Title
     local titleLabel = Instance.new("TextLabel")
     titleLabel.Text = Title
     titleLabel.Font = Enum.Font.GothamSemibold
@@ -68,7 +63,6 @@ function Console:Window(consoledebugger)
     titleLabel.TextXAlignment = Enum.TextXAlignment.Left
     titleLabel.Parent = topBar
 
-    -- Auto Delete Toggle Frame
     local toggleFrame = Instance.new("Frame")
     toggleFrame.Size = UDim2.new(0, 180, 0, 24)
     toggleFrame.Position = UDim2.new(0, 310, 0, 8)
@@ -109,7 +103,6 @@ function Console:Window(consoledebugger)
         end
     end)
 
-    -- Keybind Info Label
     local keybindLabel = Instance.new("TextLabel")
     keybindLabel.Text = "[Toggle: RightShift]"
     keybindLabel.Font = Enum.Font.Gotham
@@ -121,7 +114,6 @@ function Console:Window(consoledebugger)
     keybindLabel.TextXAlignment = Enum.TextXAlignment.Right
     keybindLabel.Parent = topBar
 
-    -- Log Container
     local ConsoleContainer = Instance.new("ScrollingFrame")
     ConsoleContainer.Active = true
     ConsoleContainer.BackgroundTransparency = 1
@@ -142,7 +134,6 @@ function Console:Window(consoledebugger)
         ConsoleContainer.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y + 10)
     end)
 
-    -- Dragging logic
     local dragging, dragStart, startPos, lastMousePos, lastGoalPos
     local function Lerp(a, b, t) return a + (b - a) * t end
 
@@ -179,14 +170,12 @@ function Console:Window(consoledebugger)
         end
     end)
 
-    -- RightShift toggle
     UserInputService.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.RightShift then
             ConsoleGui.Enabled = not ConsoleGui.Enabled
         end
     end)
 
-    -- Logging
     local ConsoleLog = {}
     function ConsoleLog:Prompt(promptdebugger)
         local text = tostring(promptdebugger.Title or "Nil")
@@ -214,10 +203,10 @@ function Console:Window(consoledebugger)
         label.TextXAlignment = Enum.TextXAlignment.Left
         label.Parent = ConsoleContainer
 
-        -- Animate entry
         TweenService:Create(label, TweenInfo.new(0.2, Enum.EasingStyle.Quint), { TextTransparency = 0 }):Play()
+        task.wait(0.03)
+        ConsoleContainer.CanvasPosition = Vector2.new(0, ConsoleContainer.CanvasSize.Y.Offset)
 
-        -- Auto delete fade
         if autoDeleteLogs then
             task.delay(30, function()
                 if label and label.Parent then
