@@ -64,8 +64,8 @@ function Console:Window(consoledebugger)
     titleLabel.Parent = topBar
 
     local toggleFrame = Instance.new("Frame")
-    toggleFrame.Size = UDim2.new(0, 180, 0, 24)
-    toggleFrame.Position = UDim2.new(0, 310, 0, 8)
+    toggleFrame.Size = UDim2.new(0, 100, 0, 24)
+    toggleFrame.Position = UDim2.new(0, 485, 0, 8)
     toggleFrame.BackgroundColor3 = Color3.fromRGB(58, 58, 58)
     toggleFrame.BorderSizePixel = 0
     toggleFrame.Parent = topBar
@@ -86,7 +86,7 @@ function Console:Window(consoledebugger)
     toggleInnerCorner.Parent = toggleInner
 
     local toggleLabel = Instance.new("TextLabel")
-    toggleLabel.Text = "AutoDelete 30s"
+    toggleLabel.Text = "Auto Clear"
     toggleLabel.Font = Enum.Font.GothamSemibold
     toggleLabel.TextSize = 14
     toggleLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
@@ -102,17 +102,6 @@ function Console:Window(consoledebugger)
             toggleInner.BackgroundColor3 = autoDeleteLogs and Color3.fromRGB(83, 230, 50) or Color3.fromRGB(40, 40, 40)
         end
     end)
-
-    local keybindLabel = Instance.new("TextLabel")
-    keybindLabel.Text = "[Toggle: RightShift]"
-    keybindLabel.Font = Enum.Font.Gotham
-    keybindLabel.TextSize = 14
-    keybindLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
-    keybindLabel.BackgroundTransparency = 1
-    keybindLabel.Size = UDim2.new(0, 150, 1, 0)
-    keybindLabel.Position = UDim2.new(1, -160, 0, 0)
-    keybindLabel.TextXAlignment = Enum.TextXAlignment.Right
-    keybindLabel.Parent = topBar
 
     local ConsoleContainer = Instance.new("ScrollingFrame")
     ConsoleContainer.Active = true
@@ -208,7 +197,7 @@ function Console:Window(consoledebugger)
         ConsoleContainer.CanvasPosition = Vector2.new(0, ConsoleContainer.CanvasSize.Y.Offset)
 
         if autoDeleteLogs then
-            task.delay(30, function()
+            task.delay(10, function()
                 if label and label.Parent then
                     local tween = TweenService:Create(label, TweenInfo.new(0.5), { TextTransparency = 1 })
                     tween:Play()
