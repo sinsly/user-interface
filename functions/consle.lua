@@ -13,7 +13,7 @@ function Console:Window(consoledebugger)
     local Title = tostring(consoledebugger.Title or "Console")
     local GuiPosition = consoledebugger.Position or UDim2.new(0.5, -300, 0.5, -250)
     local DragSpeed = consoledebugger.DragSpeed or 8
-    local autoDeleteLogs = false
+    local autoDeleteLogs = true
 
     local oldGui = CoreGUI:FindFirstChild("Console")
     if oldGui then oldGui:Destroy() end
