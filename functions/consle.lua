@@ -5,7 +5,6 @@ local CoreGUI = game:GetService("CoreGui")
 local UserInputService = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
 
--- Helper function for pretty time
 local function pretty_date(date)
     return string.format("%04d-%02d-%02d %02d:%02d", date.year, date.month, date.day, date.hour, date.min)
 end
@@ -14,13 +13,13 @@ function Console:Window(consoledebugger)
     local Title = tostring(consoledebugger.Title or "Console")
     local GuiPosition = consoledebugger.Position or UDim2.new(0.5, -300, 0.5, -250)
     local DragSpeed = consoledebugger.DragSpeed or 8
-    local autoDeleteLogs = true -- toggleable
+    local autoDeleteLogs = false -- toggleable
 
     -- Remove old console
     local oldGui = CoreGUI:FindFirstChild("Console")
     if oldGui then oldGui:Destroy() end
 
-    -- Main ScreenGui
+    -- ScreenGui
     local ConsoleGui = Instance.new("ScreenGui")
     ConsoleGui.Name = "Console"
     ConsoleGui.Parent = CoreGUI
@@ -28,7 +27,7 @@ function Console:Window(consoledebugger)
 
     -- Background
     local background = Instance.new("Frame")
-    background.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    background.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     background.BorderSizePixel = 0
     background.Position = GuiPosition
     background.Size = UDim2.new(0, 600, 0, 500)
@@ -40,29 +39,95 @@ function Console:Window(consoledebugger)
     uicorner.Parent = background
 
     local uistroke = Instance.new("UIStroke")
-    uistroke.Color = Color3.fromRGB(25, 25, 25)
+    uistroke.Color = Color3.fromRGB(40, 40, 40)
     uistroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
     uistroke.Parent = background
 
-    -- Title
+    -- Top Bar Frame
+    local topBar = Instance.new("Frame")
+    topBar.Name = "TopBar"
+    topBar.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+    topBar.BorderSizePixel = 0
+    topBar.Size = UDim2.new(1, 0, 0, 40)
+    topBar.Position = UDim2.new(0, 0, 0, 0)
+    topBar.Parent = background
+
+    local topBarCorner = Instance.new("UICorner")
+    topBarCorner.CornerRadius = UDim.new(0, 6)
+    topBarCorner.Parent = topBar
+
+    -- Console Title
     local titleLabel = Instance.new("TextLabel")
     titleLabel.Text = Title
     titleLabel.Font = Enum.Font.GothamSemibold
     titleLabel.TextSize = 16
     titleLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
     titleLabel.BackgroundTransparency = 1
-    titleLabel.Size = UDim2.new(1, -20, 0, 30)
-    titleLabel.Position = UDim2.new(0, 10, 0, 5)
+    titleLabel.Size = UDim2.new(0, 300, 1, 0)
+    titleLabel.Position = UDim2.new(0, 10, 0, 0)
     titleLabel.TextXAlignment = Enum.TextXAlignment.Left
-    titleLabel.Parent = background
+    titleLabel.Parent = topBar
+
+    -- Auto Delete Toggle Frame
+    local toggleFrame = Instance.new("Frame")
+    toggleFrame.Size = UDim2.new(0, 180, 0, 24)
+    toggleFrame.Position = UDim2.new(0, 310, 0, 8)
+    toggleFrame.BackgroundColor3 = Color3.fromRGB(58, 58, 58)
+    toggleFrame.BorderSizePixel = 0
+    toggleFrame.Parent = topBar
+
+    local toggleCorner = Instance.new("UICorner")
+    toggleCorner.CornerRadius = UDim.new(0, 12)
+    toggleCorner.Parent = toggleFrame
+
+    local toggleInner = Instance.new("Frame")
+    toggleInner.Size = UDim2.new(0, 16, 0, 16)
+    toggleInner.Position = UDim2.new(0, 4, 0, 4)
+    toggleInner.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    toggleInner.BorderSizePixel = 0
+    toggleInner.Parent = toggleFrame
+
+    local toggleInnerCorner = Instance.new("UICorner")
+    toggleInnerCorner.CornerRadius = UDim.new(0, 12)
+    toggleInnerCorner.Parent = toggleInner
+
+    local toggleLabel = Instance.new("TextLabel")
+    toggleLabel.Text = "AutoDelete 30s"
+    toggleLabel.Font = Enum.Font.GothamSemibold
+    toggleLabel.TextSize = 14
+    toggleLabel.TextColor3 = Color3.fromRGB(220, 220, 220)
+    toggleLabel.BackgroundTransparency = 1
+    toggleLabel.Size = UDim2.new(0, 120, 1, 0)
+    toggleLabel.Position = UDim2.new(0, 26, 0, 0)
+    toggleLabel.TextXAlignment = Enum.TextXAlignment.Left
+    toggleLabel.Parent = toggleFrame
+
+    toggleFrame.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            autoDeleteLogs = not autoDeleteLogs
+            toggleInner.BackgroundColor3 = autoDeleteLogs and Color3.fromRGB(83, 230, 50) or Color3.fromRGB(40, 40, 40)
+        end
+    end)
+
+    -- Keybind Info Label
+    local keybindLabel = Instance.new("TextLabel")
+    keybindLabel.Text = "[Toggle: RightShift]"
+    keybindLabel.Font = Enum.Font.Gotham
+    keybindLabel.TextSize = 14
+    keybindLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+    keybindLabel.BackgroundTransparency = 1
+    keybindLabel.Size = UDim2.new(0, 150, 1, 0)
+    keybindLabel.Position = UDim2.new(1, -160, 0, 0)
+    keybindLabel.TextXAlignment = Enum.TextXAlignment.Right
+    keybindLabel.Parent = topBar
 
     -- Log Container
     local ConsoleContainer = Instance.new("ScrollingFrame")
     ConsoleContainer.Active = true
     ConsoleContainer.BackgroundTransparency = 1
     ConsoleContainer.BorderSizePixel = 0
-    ConsoleContainer.Position = UDim2.new(0, 10, 0, 40)
-    ConsoleContainer.Size = UDim2.new(1, -20, 1, -90)
+    ConsoleContainer.Position = UDim2.new(0, 10, 0, 50)
+    ConsoleContainer.Size = UDim2.new(1, -20, 1, -60)
     ConsoleContainer.CanvasSize = UDim2.new(0, 0, 0, 0)
     ConsoleContainer.ScrollBarThickness = 6
     ConsoleContainer.ScrollBarImageColor3 = Color3.fromRGB(50, 50, 50)
@@ -77,7 +142,7 @@ function Console:Window(consoledebugger)
         ConsoleContainer.CanvasSize = UDim2.new(0, 0, 0, listLayout.AbsoluteContentSize.Y + 10)
     end)
 
-    -- Dragging
+    -- Dragging logic
     local dragging, dragStart, startPos, lastMousePos, lastGoalPos
     local function Lerp(a, b, t) return a + (b - a) * t end
 
@@ -98,9 +163,8 @@ function Console:Window(consoledebugger)
     RunService.Heartbeat:Connect(Update)
 
     background.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
-            dragStart = input.Position
             startPos = background.Position
             lastMousePos = UserInputService:GetMouseLocation()
             input.Changed:Connect(function()
@@ -110,43 +174,16 @@ function Console:Window(consoledebugger)
     end)
 
     background.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        if input.UserInputType == Enum.UserInputType.MouseMovement then
             dragInput = input
         end
     end)
 
-    -- Toggle visibility with RightShift
-    UserInputService.InputBegan:Connect(function(input, processed)
+    -- RightShift toggle
+    UserInputService.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.RightShift then
             ConsoleGui.Enabled = not ConsoleGui.Enabled
         end
-    end)
-
-    -- Slider toggle for auto-delete logs
-    local toggleLabel = Instance.new("TextLabel")
-    toggleLabel.Text = "Auto Delete Logs After 30s:"
-    toggleLabel.Font = Enum.Font.Gotham
-    toggleLabel.TextSize = 14
-    toggleLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
-    toggleLabel.BackgroundTransparency = 1
-    toggleLabel.Position = UDim2.new(0, 10, 1, -40)
-    toggleLabel.Size = UDim2.new(0, 200, 0, 20)
-    toggleLabel.Parent = background
-
-    local toggleButton = Instance.new("TextButton")
-    toggleButton.Text = autoDeleteLogs and "ON" or "OFF"
-    toggleButton.Font = Enum.Font.GothamSemibold
-    toggleButton.TextSize = 14
-    toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-    toggleButton.BackgroundColor3 = autoDeleteLogs and Color3.fromRGB(83, 230, 50) or Color3.fromRGB(150, 50, 50)
-    toggleButton.Size = UDim2.new(0, 50, 0, 20)
-    toggleButton.Position = UDim2.new(0, 220, 1, -40)
-    toggleButton.Parent = background
-
-    toggleButton.MouseButton1Click:Connect(function()
-        autoDeleteLogs = not autoDeleteLogs
-        toggleButton.Text = autoDeleteLogs and "ON" or "OFF"
-        toggleButton.BackgroundColor3 = autoDeleteLogs and Color3.fromRGB(83, 230, 50) or Color3.fromRGB(150, 50, 50)
     end)
 
     -- Logging
@@ -157,15 +194,10 @@ function Console:Window(consoledebugger)
         local time = pretty_date(os.date("*t", os.time()))
         local finalText = "["..time.."] "..text
 
-        if type_ == "success" then
-            finalText = "{Success} : "..finalText
-        elseif type_ == "fail" then
-            finalText = "{Error} : "..finalText
-        elseif type_ == "warning" then
-            finalText = "{Warning} : "..finalText
-        elseif type_ == "notification" or type_ == "nofitication" then
-            finalText = "{Notification} : "..finalText
-        end
+        if type_ == "success" then finalText = "{Success} : "..finalText
+        elseif type_ == "fail" then finalText = "{Error} : "..finalText
+        elseif type_ == "warning" then finalText = "{Warning} : "..finalText
+        elseif type_ == "notification" or type_ == "nofitication" then finalText = "{Notification} : "..finalText end
 
         local label = Instance.new("TextLabel")
         label.Text = finalText
@@ -185,7 +217,7 @@ function Console:Window(consoledebugger)
         -- Animate entry
         TweenService:Create(label, TweenInfo.new(0.2, Enum.EasingStyle.Quint), { TextTransparency = 0 }):Play()
 
-        -- Auto delete with fade if enabled
+        -- Auto delete fade
         if autoDeleteLogs then
             task.delay(30, function()
                 if label and label.Parent then
