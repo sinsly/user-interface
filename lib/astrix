@@ -349,8 +349,8 @@ local Compkiller = {
 
 Compkiller.Colors = {
 	Highlight = Color3.fromRGB(255, 110, 0),
-	Toggle = Color3.fromRGB(14, 203, 213),
-	Risky = Color3.fromRGB(251, 255, 39),
+	Toggle = Color3.fromRGB(255, 110, 0),
+	Risky = Color3.fromRGB(255, 160, 0),
 	BGDBColor = Color3.fromRGB(22, 24, 29),
 	BlockColor = Color3.fromRGB(28, 29, 34),
 	StrokeColor = Color3.fromRGB(37, 38, 43),
@@ -5406,7 +5406,7 @@ function Compkiller.new(Config : Window)
 		Tabs = {},
 		LastTab = nil,
 		IsOpen = true,
-		AlwayShowTab = false,
+		AlwayShowTab = true,
 		THREADS = {},
 		PerformanceMode = false,
 		Notify = Compkiller.newNotify()
