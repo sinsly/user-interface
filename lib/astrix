@@ -1,19 +1,16 @@
 --[[
-    		Compkiller Interface
+    		Astrix Interface
 
-    Author: 4lpaca
+    Author: sinsly
     License: MIT
-    Github: https://github.com/4lpaca-pin/CompKiller
+    Github: https://github.com/sinsly
     Version: 2.4
-    Original: compkiller.net
 
-        Version: 2.4
     - Fixed some bug
     - Added Secure mode > Compkiller:Security("Cache-Directory")
         Secure mode: this will cache all images to your workspace and disabled blur
 --]]
 
---- Export Types ---
 
 export type cloneref = (target: Instance) -> Instance;
 
