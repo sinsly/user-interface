@@ -91,16 +91,18 @@ function Notif.New(text, timee)
     uistroke.Color = Color3.new(0.0313726, 0.0313726, 0.0313726)
     uistroke.Parent = frame_3
 
-    local text_label = Instance.new("TextLabel")
-    text_label.Font = Enum.Font.Gotham
-    text_label.Text = text
-    text_label.TextColor3 = Color3.new(0.784314, 0.784314, 0.784314)
-    text_label.TextSize = 14
-    text_label.AutomaticSize = Enum.AutomaticSize.X
-    text_label.BackgroundTransparency = 1
-    text_label.Size = UDim2.new(0, 0, 0, 24)
-    text_label.Visible = true
-    text_label.Parent = frame_3
+	local text_label = Instance.new("TextLabel")
+	text_label.Font = Enum.Font.Gotham
+	text_label.Text = text 
+	text_label.TextColor3 = Color3.fromRGB(200, 200, 200) 
+	text_label.TextSize = 14
+	text_label.Position = UDim2.new(0.02, 0, 0.1, 0) 
+	text_label.AutomaticSize = Enum.AutomaticSize.X
+	text_label.BackgroundTransparency = 1
+	text_label.Size = UDim2.new(0, 0, 0, 24)
+	text_label.Visible = true
+	text_label.Parent = frame_3
+
 
     local uipadding_2 = Instance.new("UIPadding")
     uipadding_2.PaddingLeft = UDim.new(0, 5)
