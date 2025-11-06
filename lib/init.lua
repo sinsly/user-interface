@@ -3301,50 +3301,55 @@ function init:CreateElements(Parent : Frame , ZIndex : number , Event : Bindable
 	end;
 	
 	function elements:AddKeybind(Config: Keybind)
-	Config = Config or {}
-	Config.Name = Config.Name or "Keybind"
-	Config.Option = Config.Option or false
-	Config.Default = Config.Default or nil
-	Config.Callback = Config.Callback or function() end
-	Config.ChangedCallback = Config.ChangedCallback or function() end
+		Config = Config or {};
+		Config.Name = Config.Name or "Keybind";
+		Config.Option = Config.Option or false;
+		Config.Default = Config.Default or nil;
+		Config.Callback = Config.Callback or function(any) end;
 
-	local Keys = {
-		One = "1", Two = "2", Three = "3", Four = "4", Five = "5",
-		Six = "6", Seven = "7", Eight = "8", Nine = "9", Zero = "0",
-		Minus = "-", Plus = "+", BackSlash = "\\", Slash = "/", Period = ".",
-		Semicolon = ";", Colon = ":", LeftControl = "LCtrl", RightControl = "RCtrl",
-		LeftShift = "LShift", RightShift = "RShift", Return = "Enter",
-		LeftBracket = "[", RightBracket = "]", Quote = "'", Comma = ",",
-		Equals = "=", LeftSuper = "Super", RightSuper = "Super"
-	}
+		local Keys = {
+			One = '1',
+			Two = '2',
+			Three = '3',
+			Four = '4',
+			Five = '5',
+			Six = '6',
+			Seven = '7',
+			Eight = '8',
+			Nine = '9',
+			Zero = '0',
+			['Minus'] = "-",
+			['Plus'] = "+",
+			BackSlash = "\\",
+			Slash = "/",
+			Period = '.',
+			Semicolon = ';',
+			Colon = ":",
+			LeftControl = "LCtrl",
+			RightControl = "RCtrl",
+			LeftShift = "LShift",
+			RightShift = "RShift",
+			Return = "Enter",
+			LeftBracket = "[",
+			RightBracket = "]",
+			Quote = "'",
+			Comma = ",",
+			Equals = "=",
+			LeftSuper = "Super",
+			RightSuper = "Super"
+		};
 
-	local function GetItem(item)
-		if item then
-			if typeof(item) == "EnumItem" then
-				return Keys[item.Name] or item.Name
+		local GetItem = function(item)
+			if item then
+				if typeof(item) == 'EnumItem' then
+					return Keys[item.Name] or item.Name;
+				else
+					return Keys[tostring(item)] or tostring(item);
+				end;
 			else
-				return Keys[tostring(item)] or tostring(item)
-			end
-		else
-			return "None"
-		end
-	end
-
-	local CurrentKey = Config.Default
-
-	-- detect when the bound key changes
-	local function SetNewKey(NewKey)
-		CurrentKey = NewKey
-		Config.ChangedCallback(NewKey)
-	end
-
-	-- listen for key presses
-	game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
-		if not processed and CurrentKey and input.KeyCode == CurrentKey then
-			Config.Callback(CurrentKey)
-		end
-	end)
-end
+				return 'None';
+			end;
+		end;
 
 		local Keybind = Instance.new("Frame")
 		local Keybind_Name = Instance.new("TextLabel")
