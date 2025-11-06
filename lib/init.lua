@@ -1302,7 +1302,7 @@ function init:CreateOption(OptionButton: ImageButton): Elements
 	init:ScrollSignal(ScrollingFrame,UIListLayout,'Y');
 
 	ExtElementFrame.Active = true;
-	ExtElementFrame.Name = "init"
+	ExtElementFrame.Name = init:RandomString()
 	ExtElementFrame.Parent = OwnWindow
 	ExtElementFrame.AnchorPoint = Vector2.new(0.5, 0)
 	ExtElementFrame.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
