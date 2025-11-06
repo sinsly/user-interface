@@ -3825,7 +3825,7 @@ function init:CreateConfigWindow(Root: ScreenGui , Fatal , Button: ImageButton)
 	SaveConfigButton.Position = UDim2.new(1, -8, 0, 28)
 	SaveConfigButton.Size = UDim2.new(0, 15, 0, 15)
 	SaveConfigButton.ZIndex = 209
-	SaveConfigButton.Image = "rbxassetid://10734941499"
+	SaveConfigButton.Image = "rbxassetid://"
 	SaveConfigButton.ImageTransparency = 0.500
 
 	UICorner_6.CornerRadius = UDim.new(1, 0)
@@ -5802,7 +5802,7 @@ function init.new(Window: Window)
 		InfoButton.Position = UDim2.new(1, -5, 0.5, 0)
 		InfoButton.Size = UDim2.new(0, 16, 0, 16)
 		InfoButton.ZIndex = 4
-		InfoButton.Image = "rbxassetid://10723415903"
+		InfoButton.Image = "rbxassetid://"
 		InfoButton.ImageTransparency = 0.500
 
 		SearchButton.Name = init:RandomString()
