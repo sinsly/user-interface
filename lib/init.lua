@@ -5828,7 +5828,7 @@ function init.new(Window: Window)
 		SaveButton.Position = UDim2.new(0, 35, 0.5, 0)
 		SaveButton.Size = UDim2.new(0, 16, 0, 16)
 		SaveButton.ZIndex = 4
-		SaveButton.Image = "rbxassetid://10734941499"
+		SaveButton.Image = "rbxassetid://"
 		SaveButton.ImageTransparency = 0.500
 
 		init:CreateHover(SaveButton,function(bool)
