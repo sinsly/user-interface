@@ -2250,6 +2250,8 @@ function SectionTable:NewDropdown(drop)
     }
 end
 
+return SectionTable; end; return TabTable; end;
+
 	local dragToggle = nil;
 	local dragSpeed = 0.1;
 	local dragStart = nil;
