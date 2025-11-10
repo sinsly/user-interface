@@ -154,6 +154,7 @@ local themes = {
 				}
 			}
 		}
+    },
 			Blush = {
 		['Shadow'] = Color3.fromRGB(30, 20, 25),
 		['Background'] = Color3.fromRGB(255, 200, 210),
@@ -280,8 +281,6 @@ local themes = {
 			}
 		}
 	}
-}
-	},
 }
 
 local ScreenGui = Instance.new("ScreenGui")
