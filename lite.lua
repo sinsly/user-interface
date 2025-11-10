@@ -2,7 +2,7 @@ Library = {}
 SaveTheme = {}
 
 local themes = {
-	index = {'Light', 'Dark', 'Discord', 'Blush', 'Sunset', 'Poison'},
+	index = {'Dark', 'Light', 'Blush', 'Sunset', 'Poison', 'Discord'},
 	Discord = {
 		['Shadow'] = Color3.fromRGB(24, 24, 31),
 		['Background'] = Color3.fromRGB(29, 28, 38),
