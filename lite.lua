@@ -80,159 +80,159 @@ local themes = {
 		}
 	},
 Blush = {
-	['Shadow'] = Color3.fromRGB(27, 20, 27),
-	['Background'] = Color3.fromRGB(36, 28, 36),
-	['Page'] = Color3.fromRGB(30, 22, 30),
-	['Main'] = Color3.fromRGB(255, 145, 164),
-	['Text & Icon'] = Color3.fromRGB(255, 240, 245),
+	['Shadow'] = Color3.fromRGB(210, 185, 195),
+	['Background'] = Color3.fromRGB(235, 210, 220),
+	['Page'] = Color3.fromRGB(245, 225, 235),
+	['Main'] = Color3.fromRGB(255, 155, 185), -- soft rose pink
+	['Text & Icon'] = Color3.fromRGB(60, 40, 50),
 	['Function'] = {
 		['Toggle'] = {
-			['Background'] = Color3.fromRGB(36, 28, 36),
+			['Background'] = Color3.fromRGB(240, 215, 225),
 			['True'] = {
-				['Toggle Background'] = Color3.fromRGB(81, 52, 73),
-				['Toggle Value'] = Color3.fromRGB(255, 145, 164),
+				['Toggle Background'] = Color3.fromRGB(255, 195, 215),
+				['Toggle Value'] = Color3.fromRGB(255, 155, 185),
 			},
 			['False'] = {
-				['Toggle Background'] = Color3.fromRGB(48, 38, 48),
-				['Toggle Value'] = Color3.fromRGB(73, 53, 73),
+				['Toggle Background'] = Color3.fromRGB(225, 200, 210),
+				['Toggle Value'] = Color3.fromRGB(195, 160, 180),
 			}
 		},
 		['Label'] = {
-			['Background'] = Color3.fromRGB(36, 28, 36),
+			['Background'] = Color3.fromRGB(245, 225, 235),
 		},
 		['Dropdown'] = {
-			['Background'] = Color3.fromRGB(36, 28, 36),
-			['Value Background'] = Color3.fromRGB(30, 22, 30),
-			['Value Stroke'] = Color3.fromRGB(255, 240, 245),
+			['Background'] = Color3.fromRGB(240, 215, 225),
+			['Value Background'] = Color3.fromRGB(250, 230, 240),
+			['Value Stroke'] = Color3.fromRGB(255, 190, 210),
 			['Dropdown Select'] = {
-				['Background'] = Color3.fromRGB(30, 22, 30),
-				['Search'] = Color3.fromRGB(40, 32, 40),
-				['Item Background'] = Color3.fromRGB(56, 44, 56),
+				['Background'] = Color3.fromRGB(250, 230, 240),
+				['Search'] = Color3.fromRGB(255, 225, 235),
+				['Item Background'] = Color3.fromRGB(255, 215, 230),
 			}
 		},
 		['Slider'] = {
-			['Background'] = Color3.fromRGB(36, 28, 36),
-			['Value Background'] = Color3.fromRGB(30, 22, 30),
-			['Value Stroke'] = Color3.fromRGB(255, 240, 245),
-			['Slider Bar'] = Color3.fromRGB(81, 52, 73),
-			['Slider Bar Value'] = Color3.fromRGB(255, 145, 164),
+			['Background'] = Color3.fromRGB(240, 215, 225),
+			['Value Background'] = Color3.fromRGB(250, 230, 240),
+			['Value Stroke'] = Color3.fromRGB(255, 190, 210),
+			['Slider Bar'] = Color3.fromRGB(255, 195, 215),
+			['Slider Bar Value'] = Color3.fromRGB(255, 155, 185),
 			['Circle Value'] = Color3.fromRGB(255, 255, 255)
 		},
 		['Code'] = {
 			['Background'] = ColorSequence.new{
-				ColorSequenceKeypoint.new(0, Color3.fromRGB(36, 28, 36)),
-				ColorSequenceKeypoint.new(1, Color3.fromRGB(36, 28, 36))
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(240, 215, 225)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(240, 215, 225))
 			},
-			['Background Code'] = Color3.fromRGB(84, 65, 76),
-			['Background Code Value'] = Color3.fromRGB(66, 48, 59),
-			['ScrollingFrame Code'] = Color3.fromRGB(255, 182, 193)
+			['Background Code'] = Color3.fromRGB(255, 205, 220),
+			['Background Code Value'] = Color3.fromRGB(250, 195, 210),
+			['ScrollingFrame Code'] = Color3.fromRGB(255, 160, 185)
 		},
 		['Button'] = {
-			['Background'] = Color3.fromRGB(36, 28, 36),
-			['Click'] = Color3.fromRGB(255, 182, 193)
+			['Background'] = Color3.fromRGB(240, 215, 225),
+			['Click'] = Color3.fromRGB(255, 155, 185)
 		},
 		['Textbox'] = {
-			['Background'] = Color3.fromRGB(36, 28, 36),
-			['Value Background'] = Color3.fromRGB(30, 22, 30),
-			['Value Stroke'] = Color3.fromRGB(255, 240, 245),
+			['Background'] = Color3.fromRGB(240, 215, 225),
+			['Value Background'] = Color3.fromRGB(250, 230, 240),
+			['Value Stroke'] = Color3.fromRGB(255, 190, 210),
 		},
 		['Keybind'] = {
-			['Background'] = Color3.fromRGB(36, 28, 36),
-			['Value Background'] = Color3.fromRGB(30, 22, 30),
-			['Value Stroke'] = Color3.fromRGB(255, 240, 245),
+			['Background'] = Color3.fromRGB(240, 215, 225),
+			['Value Background'] = Color3.fromRGB(250, 230, 240),
+			['Value Stroke'] = Color3.fromRGB(255, 190, 210),
 			['True'] = {
-				['Toggle Background'] = Color3.fromRGB(81, 52, 73),
-				['Toggle Value'] = Color3.fromRGB(255, 145, 164),
+				['Toggle Background'] = Color3.fromRGB(255, 195, 215),
+				['Toggle Value'] = Color3.fromRGB(255, 155, 185),
 			},
 			['False'] = {
-				['Toggle Background'] = Color3.fromRGB(48, 38, 48),
-				['Toggle Value'] = Color3.fromRGB(73, 53, 73),
+				['Toggle Background'] = Color3.fromRGB(225, 200, 210),
+				['Toggle Value'] = Color3.fromRGB(195, 160, 180),
 			}
 		},
 		['Color Picker'] = {
-			['Background'] = Color3.fromRGB(36, 28, 36),
+			['Background'] = Color3.fromRGB(240, 215, 225),
 			['Color Select'] = {
-				['Background'] = Color3.fromRGB(30, 22, 30),
-				['UIStroke'] = Color3.fromRGB(255, 240, 245),
+				['Background'] = Color3.fromRGB(250, 230, 240),
+				['UIStroke'] = Color3.fromRGB(255, 190, 210),
 			}
 		}
 	}
 },
 Poison = {
-	['Shadow'] = Color3.fromRGB(15, 18, 20),
-	['Background'] = Color3.fromRGB(22, 25, 29),
-	['Page'] = Color3.fromRGB(18, 21, 25),
-	['Main'] = Color3.fromRGB(108, 255, 150),
-	['Text & Icon'] = Color3.fromRGB(225, 255, 230),
+	['Shadow'] = Color3.fromRGB(10, 12, 14),
+	['Background'] = Color3.fromRGB(18, 20, 22),
+	['Page'] = Color3.fromRGB(12, 14, 15),
+	['Main'] = Color3.fromRGB(0, 255, 150), -- neon toxic green
+	['Text & Icon'] = Color3.fromRGB(200, 255, 210),
 	['Function'] = {
 		['Toggle'] = {
-			['Background'] = Color3.fromRGB(22, 25, 29),
+			['Background'] = Color3.fromRGB(22, 25, 27),
 			['True'] = {
-				['Toggle Background'] = Color3.fromRGB(40, 55, 40),
-				['Toggle Value'] = Color3.fromRGB(108, 255, 150),
+				['Toggle Background'] = Color3.fromRGB(25, 35, 25),
+				['Toggle Value'] = Color3.fromRGB(0, 255, 150),
 			},
 			['False'] = {
-				['Toggle Background'] = Color3.fromRGB(38, 35, 45),
-				['Toggle Value'] = Color3.fromRGB(65, 55, 80),
+				['Toggle Background'] = Color3.fromRGB(35, 32, 45),
+				['Toggle Value'] = Color3.fromRGB(90, 0, 110),
 			}
 		},
 		['Label'] = {
-			['Background'] = Color3.fromRGB(22, 25, 29),
+			['Background'] = Color3.fromRGB(22, 25, 27),
 		},
 		['Dropdown'] = {
-			['Background'] = Color3.fromRGB(22, 25, 29),
-			['Value Background'] = Color3.fromRGB(18, 21, 25),
-			['Value Stroke'] = Color3.fromRGB(225, 255, 230),
+			['Background'] = Color3.fromRGB(22, 25, 27),
+			['Value Background'] = Color3.fromRGB(18, 20, 22),
+			['Value Stroke'] = Color3.fromRGB(180, 255, 200),
 			['Dropdown Select'] = {
-				['Background'] = Color3.fromRGB(18, 21, 25),
+				['Background'] = Color3.fromRGB(18, 20, 22),
 				['Search'] = Color3.fromRGB(28, 31, 35),
-				['Item Background'] = Color3.fromRGB(48, 55, 52),
+				['Item Background'] = Color3.fromRGB(55, 65, 55),
 			}
 		},
 		['Slider'] = {
-			['Background'] = Color3.fromRGB(22, 25, 29),
-			['Value Background'] = Color3.fromRGB(18, 21, 25),
-			['Value Stroke'] = Color3.fromRGB(225, 255, 230),
-			['Slider Bar'] = Color3.fromRGB(60, 80, 60),
-			['Slider Bar Value'] = Color3.fromRGB(108, 255, 150),
+			['Background'] = Color3.fromRGB(22, 25, 27),
+			['Value Background'] = Color3.fromRGB(18, 20, 22),
+			['Value Stroke'] = Color3.fromRGB(180, 255, 200),
+			['Slider Bar'] = Color3.fromRGB(60, 0, 90), -- purple base
+			['Slider Bar Value'] = Color3.fromRGB(0, 255, 150), -- neon highlight
 			['Circle Value'] = Color3.fromRGB(255, 255, 255)
 		},
 		['Code'] = {
 			['Background'] = ColorSequence.new{
-				ColorSequenceKeypoint.new(0, Color3.fromRGB(22, 25, 29)),
-				ColorSequenceKeypoint.new(1, Color3.fromRGB(22, 25, 29))
+				ColorSequenceKeypoint.new(0, Color3.fromRGB(22, 25, 27)),
+				ColorSequenceKeypoint.new(1, Color3.fromRGB(22, 25, 27))
 			},
-			['Background Code'] = Color3.fromRGB(60, 55, 80),
-			['Background Code Value'] = Color3.fromRGB(45, 40, 65),
-			['ScrollingFrame Code'] = Color3.fromRGB(108, 255, 150)
+			['Background Code'] = Color3.fromRGB(60, 0, 90),
+			['Background Code Value'] = Color3.fromRGB(20, 40, 30),
+			['ScrollingFrame Code'] = Color3.fromRGB(0, 255, 150)
 		},
 		['Button'] = {
-			['Background'] = Color3.fromRGB(22, 25, 29),
-			['Click'] = Color3.fromRGB(108, 255, 150)
+			['Background'] = Color3.fromRGB(22, 25, 27),
+			['Click'] = Color3.fromRGB(0, 255, 150)
 		},
 		['Textbox'] = {
-			['Background'] = Color3.fromRGB(22, 25, 29),
-			['Value Background'] = Color3.fromRGB(18, 21, 25),
-			['Value Stroke'] = Color3.fromRGB(225, 255, 230),
+			['Background'] = Color3.fromRGB(22, 25, 27),
+			['Value Background'] = Color3.fromRGB(18, 20, 22),
+			['Value Stroke'] = Color3.fromRGB(180, 255, 200),
 		},
 		['Keybind'] = {
-			['Background'] = Color3.fromRGB(22, 25, 29),
-			['Value Background'] = Color3.fromRGB(18, 21, 25),
-			['Value Stroke'] = Color3.fromRGB(225, 255, 230),
+			['Background'] = Color3.fromRGB(22, 25, 27),
+			['Value Background'] = Color3.fromRGB(18, 20, 22),
+			['Value Stroke'] = Color3.fromRGB(180, 255, 200),
 			['True'] = {
-				['Toggle Background'] = Color3.fromRGB(40, 55, 40),
-				['Toggle Value'] = Color3.fromRGB(108, 255, 150),
+				['Toggle Background'] = Color3.fromRGB(25, 35, 25),
+				['Toggle Value'] = Color3.fromRGB(0, 255, 150),
 			},
 			['False'] = {
-				['Toggle Background'] = Color3.fromRGB(38, 35, 45),
-				['Toggle Value'] = Color3.fromRGB(65, 55, 80),
+				['Toggle Background'] = Color3.fromRGB(35, 32, 45),
+				['Toggle Value'] = Color3.fromRGB(90, 0, 110),
 			}
 		},
 		['Color Picker'] = {
-			['Background'] = Color3.fromRGB(22, 25, 29),
+			['Background'] = Color3.fromRGB(22, 25, 27),
 			['Color Select'] = {
-				['Background'] = Color3.fromRGB(18, 21, 25),
-				['UIStroke'] = Color3.fromRGB(225, 255, 230),
+				['Background'] = Color3.fromRGB(18, 20, 22),
+				['UIStroke'] = Color3.fromRGB(180, 255, 200),
 			}
 		}
 	}
