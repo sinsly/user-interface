@@ -1388,7 +1388,7 @@ function Library:Window(p)
 	Shadow_1.Size = Size
 	Shadow_1.Image = "rbxassetid://1316045217"
 	Shadow_1.ImageColor3 = Color3.fromRGB(24, 24, 31)
-	Shadow_1.ImageTransparency = 0.8
+	Shadow_1.ImageTransparency = 0.95
 	Shadow_1.ScaleType = Enum.ScaleType.Slice
 	Shadow_1.SliceCenter = Rect.new(10, 10, 118, 118)
 	Shadow_1.Visible = false
