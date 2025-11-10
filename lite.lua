@@ -139,8 +139,7 @@ local themes = {
 				['Color Select'] = {['Background'] = Color3.fromRGB(220, 230, 245), ['UIStroke'] = Color3.fromRGB(40, 60, 80)}
 			}
 		}
-	}
-},
+    },
 	Dark = {
 		['Shadow'] = Color3.fromRGB(15, 15, 15),
 		['Background'] = Color3.fromRGB(20, 20, 20),
