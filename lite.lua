@@ -782,7 +782,7 @@ do
 			Icon_1.BorderColor3 = Color3.fromRGB(0,0,0)
 			Icon_1.BorderSizePixel = 0
 			Icon_1.Position = UDim2.new(0.5, 0,0.5, 0)
-			Icon_1.Size = UDim2.new(0, 20,0, 20)
+			Icon_1.Size = UDim2.new(0, 50,0, 50)
 			Icon_1.Image = gl(i).Image
 			Icon_1.ImageRectSize = gl(i).ImageRectSize
 			Icon_1.ImageRectOffset = gl(i).ImageRectPosition
