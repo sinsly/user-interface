@@ -4621,20 +4621,8 @@ function Library:Window(p)
 		local ThemeDrop = addDropdownSelect(DropdownValue_1, DropdownValue_1, false, CallTheme, Theme, themes.index)
 
 		Close_1.MouseButton1Click:Connect(function()
-			Tabs:Dialog({
-				Title = "Do you want to <font color='#FF0000'>close</font> the ui?",
-				Button1 = {
-					Title = 'Confirm',
-					Color = Color3.fromRGB(0, 188, 0),
-					Callback = function()
 						ScreenGui:Destroy()
 					end,
-				},
-				Button2 = {
-					Title = 'Cancel',
-					Color = Color3.fromRGB(226, 39, 6),
-				}
-			})
 		end)
 
 		do
