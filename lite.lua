@@ -2,7 +2,7 @@ Library = {}
 SaveTheme = {}
 
 local themes = {
-	index = {'Dark', 'Amethyst','Blush','Frost'},
+	index = {'Dark', 'Amethyst'},
 	Amethyst = {
 		['Shadow'] = Color3.fromRGB(24, 24, 31),
 		['Background'] = Color3.fromRGB(29, 28, 38),
@@ -154,133 +154,7 @@ local themes = {
 				}
 			}
 		}
-    },
-			Blush = {
-		['Shadow'] = Color3.fromRGB(30, 20, 25),
-		['Background'] = Color3.fromRGB(255, 200, 210),
-		['Page'] = Color3.fromRGB(250, 185, 195),
-		['Main'] = Color3.fromRGB(255, 145, 175),
-		['Text & Icon'] = Color3.fromRGB(60, 40, 50),
-		['Function'] = {
-			['Toggle'] = {
-				['Background'] = Color3.fromRGB(255, 210, 220),
-				['True'] = {
-					['Toggle Background'] = Color3.fromRGB(255, 170, 190),
-					['Toggle Value'] = Color3.fromRGB(255, 145, 175),
-				},
-				['False'] = {
-					['Toggle Background'] = Color3.fromRGB(240, 190, 200),
-					['Toggle Value'] = Color3.fromRGB(255, 210, 220),
-				}
-			},
-			['Label'] = {['Background'] = Color3.fromRGB(255, 210, 220)},
-			['Dropdown'] = {
-				['Background'] = Color3.fromRGB(255, 210, 220),
-				['Value Background'] = Color3.fromRGB(255, 200, 210),
-				['Value Stroke'] = Color3.fromRGB(60, 40, 50),
-				['Dropdown Select'] = {
-					['Background'] = Color3.fromRGB(255, 200, 210),
-					['Search'] = Color3.fromRGB(245, 180, 190),
-					['Item Background'] = Color3.fromRGB(250, 160, 180),
-				}
-			},
-			['Slider'] = {
-				['Background'] = Color3.fromRGB(255, 210, 220),
-				['Value Background'] = Color3.fromRGB(255, 200, 210),
-				['Value Stroke'] = Color3.fromRGB(60, 40, 50),
-				['Slider Bar'] = Color3.fromRGB(255, 170, 190),
-				['Slider Bar Value'] = Color3.fromRGB(255, 145, 175),
-				['Circle Value'] = Color3.fromRGB(60, 40, 50)
-			},
-			['Code'] = {
-				['Background'] = ColorSequence.new{
-					ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 210, 220)),
-					ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 210, 220))
-				},
-				['Background Code'] = Color3.fromRGB(245, 180, 190),
-				['Background Code Value'] = Color3.fromRGB(235, 160, 170),
-				['ScrollingFrame Code'] = Color3.fromRGB(255, 100, 150)
-			},
-			['Button'] = {['Background'] = Color3.fromRGB(255, 210, 220), ['Click'] = Color3.fromRGB(60, 40, 50)},
-			['Textbox'] = {['Background'] = Color3.fromRGB(255, 210, 220), ['Value Background'] = Color3.fromRGB(255, 200, 210), ['Value Stroke'] = Color3.fromRGB(60, 40, 50)},
-			['Keybind'] = {
-				['Background'] = Color3.fromRGB(255, 210, 220),
-				['Value Background'] = Color3.fromRGB(255, 200, 210),
-				['Value Stroke'] = Color3.fromRGB(60, 40, 50),
-				['True'] = {['Toggle Background'] = Color3.fromRGB(255, 170, 190), ['Toggle Value'] = Color3.fromRGB(255, 145, 175)},
-				['False'] = {['Toggle Background'] = Color3.fromRGB(240, 190, 200), ['Toggle Value'] = Color3.fromRGB(255, 210, 220)}
-			},
-			['Color Picker'] = {
-				['Background'] = Color3.fromRGB(255, 210, 220),
-				['Color Select'] = {['Background'] = Color3.fromRGB(255, 200, 210), ['UIStroke'] = Color3.fromRGB(60, 40, 50)}
-			}
-		}
 	},
-
-	----------------------------------------------------------------
-	-- FROST THEME (Ice blue / minimal)
-	----------------------------------------------------------------
-	Frost = {
-		['Shadow'] = Color3.fromRGB(200, 220, 235),
-		['Background'] = Color3.fromRGB(230, 240, 250),
-		['Page'] = Color3.fromRGB(220, 230, 245),
-		['Main'] = Color3.fromRGB(150, 200, 255),
-		['Text & Icon'] = Color3.fromRGB(40, 60, 80),
-		['Function'] = {
-			['Toggle'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['True'] = {
-					['Toggle Background'] = Color3.fromRGB(190, 220, 255),
-					['Toggle Value'] = Color3.fromRGB(150, 200, 255),
-				},
-				['False'] = {
-					['Toggle Background'] = Color3.fromRGB(210, 230, 245),
-					['Toggle Value'] = Color3.fromRGB(230, 240, 250),
-				}
-			},
-			['Label'] = {['Background'] = Color3.fromRGB(230, 240, 250)},
-			['Dropdown'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['Value Background'] = Color3.fromRGB(220, 230, 245),
-				['Value Stroke'] = Color3.fromRGB(40, 60, 80),
-				['Dropdown Select'] = {
-					['Background'] = Color3.fromRGB(220, 230, 245),
-					['Search'] = Color3.fromRGB(200, 220, 235),
-					['Item Background'] = Color3.fromRGB(190, 210, 230),
-				}
-			},
-			['Slider'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['Value Background'] = Color3.fromRGB(220, 230, 245),
-				['Value Stroke'] = Color3.fromRGB(40, 60, 80),
-				['Slider Bar'] = Color3.fromRGB(180, 210, 255),
-				['Slider Bar Value'] = Color3.fromRGB(150, 200, 255),
-				['Circle Value'] = Color3.fromRGB(40, 60, 80)
-			},
-			['Code'] = {
-				['Background'] = ColorSequence.new{
-					ColorSequenceKeypoint.new(0, Color3.fromRGB(230, 240, 250)),
-					ColorSequenceKeypoint.new(1, Color3.fromRGB(230, 240, 250))
-				},
-				['Background Code'] = Color3.fromRGB(200, 220, 235),
-				['Background Code Value'] = Color3.fromRGB(180, 210, 230),
-				['ScrollingFrame Code'] = Color3.fromRGB(130, 180, 230)
-			},
-			['Button'] = {['Background'] = Color3.fromRGB(230, 240, 250), ['Click'] = Color3.fromRGB(40, 60, 80)},
-			['Textbox'] = {['Background'] = Color3.fromRGB(230, 240, 250), ['Value Background'] = Color3.fromRGB(220, 230, 245), ['Value Stroke'] = Color3.fromRGB(40, 60, 80)},
-			['Keybind'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['Value Background'] = Color3.fromRGB(220, 230, 245),
-				['Value Stroke'] = Color3.fromRGB(40, 60, 80),
-				['True'] = {['Toggle Background'] = Color3.fromRGB(190, 220, 255), ['Toggle Value'] = Color3.fromRGB(150, 200, 255)},
-				['False'] = {['Toggle Background'] = Color3.fromRGB(210, 230, 245), ['Toggle Value'] = Color3.fromRGB(230, 240, 250)}
-			},
-			['Color Picker'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['Color Select'] = {['Background'] = Color3.fromRGB(220, 230, 245), ['UIStroke'] = Color3.fromRGB(40, 60, 80)}
-			}
-		}
-	}
 }
 
 local ScreenGui = Instance.new("ScreenGui")
