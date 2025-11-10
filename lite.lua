@@ -1575,7 +1575,7 @@ function Library:Window(p)
 	Icon_1.BackgroundTransparency = 1
 	Icon_1.BorderColor3 = Color3.fromRGB(0,0,0)
 	Icon_1.BorderSizePixel = 0
-	Icon_1.Size = UDim2.new(0, 50,0, 30)
+	Icon_1.Size = UDim2.new(0, 50,0, 50)
 	Icon_1.Image = gl(Icon).Image
 	Icon_1.ImageRectSize = gl(Icon).ImageRectSize
 	Icon_1.ImageRectOffset = gl(Icon).ImageRectPosition
