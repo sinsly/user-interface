@@ -4320,7 +4320,7 @@ function Library:Window(p)
 		Shadow.Size = UDim2.new(0, 180,0, 0)
 		Shadow.Image = "rbxassetid://1316045217"
 		Shadow.ImageColor3 = themes[IsTheme].Shadow
-		Shadow.ImageTransparency = 0.5
+		Shadow.ImageTransparency = 0.8
 		Shadow.ScaleType = Enum.ScaleType.Slice
 		Shadow.SliceCenter = Rect.new(10, 10, 118, 118)
 
@@ -4958,7 +4958,7 @@ end)
 			CloseUIShadow.Size = UDim2.new(0, 70,0, 40)
 			CloseUIShadow.Image = "rbxassetid://1316045217"
 			CloseUIShadow.ImageColor3 = Color3.fromRGB(24,24,31)
-			CloseUIShadow.ImageTransparency = 0.5
+			CloseUIShadow.ImageTransparency = 0.95
 			CloseUIShadow.ScaleType = Enum.ScaleType.Slice
 			CloseUIShadow.SliceCenter = Rect.new(10, 10, 118, 118)
 			CloseUIShadow.Visible = CloseUI.Enabled
