@@ -2,7 +2,7 @@ Library = {}
 SaveTheme = {}
 
 local themes = {
-	index = {'Discord', 'Frost', 'Dark'},
+	index = {'Discord', 'Dark'},
 	Discord = {
 		['Shadow'] = Color3.fromRGB(24, 24, 31),
 		['Background'] = Color3.fromRGB(29, 28, 38),
@@ -79,67 +79,6 @@ local themes = {
 			}
 		}
 	},
-	Frost = {
-		['Shadow'] = Color3.fromRGB(200, 220, 235),
-		['Background'] = Color3.fromRGB(230, 240, 250),
-		['Page'] = Color3.fromRGB(220, 230, 245),
-		['Main'] = Color3.fromRGB(150, 200, 255),
-		['Text & Icon'] = Color3.fromRGB(40, 60, 80),
-		['Function'] = {
-			['Toggle'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['True'] = {
-					['Toggle Background'] = Color3.fromRGB(190, 220, 255),
-					['Toggle Value'] = Color3.fromRGB(150, 200, 255),
-				},
-				['False'] = {
-					['Toggle Background'] = Color3.fromRGB(210, 230, 245),
-					['Toggle Value'] = Color3.fromRGB(230, 240, 250),
-				}
-			},
-			['Label'] = {['Background'] = Color3.fromRGB(230, 240, 250)},
-			['Dropdown'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['Value Background'] = Color3.fromRGB(220, 230, 245),
-				['Value Stroke'] = Color3.fromRGB(40, 60, 80),
-				['Dropdown Select'] = {
-					['Background'] = Color3.fromRGB(220, 230, 245),
-					['Search'] = Color3.fromRGB(200, 220, 235),
-					['Item Background'] = Color3.fromRGB(190, 210, 230),
-				}
-			},
-			['Slider'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['Value Background'] = Color3.fromRGB(220, 230, 245),
-				['Value Stroke'] = Color3.fromRGB(40, 60, 80),
-				['Slider Bar'] = Color3.fromRGB(180, 210, 255),
-				['Slider Bar Value'] = Color3.fromRGB(150, 200, 255),
-				['Circle Value'] = Color3.fromRGB(40, 60, 80)
-			},
-			['Code'] = {
-				['Background'] = ColorSequence.new{
-					ColorSequenceKeypoint.new(0, Color3.fromRGB(230, 240, 250)),
-					ColorSequenceKeypoint.new(1, Color3.fromRGB(230, 240, 250))
-				},
-				['Background Code'] = Color3.fromRGB(200, 220, 235),
-				['Background Code Value'] = Color3.fromRGB(180, 210, 230),
-				['ScrollingFrame Code'] = Color3.fromRGB(130, 180, 230)
-			},
-			['Button'] = {['Background'] = Color3.fromRGB(230, 240, 250), ['Click'] = Color3.fromRGB(40, 60, 80)},
-			['Textbox'] = {['Background'] = Color3.fromRGB(230, 240, 250), ['Value Background'] = Color3.fromRGB(220, 230, 245), ['Value Stroke'] = Color3.fromRGB(40, 60, 80)},
-			['Keybind'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['Value Background'] = Color3.fromRGB(220, 230, 245),
-				['Value Stroke'] = Color3.fromRGB(40, 60, 80),
-				['True'] = {['Toggle Background'] = Color3.fromRGB(190, 220, 255), ['Toggle Value'] = Color3.fromRGB(150, 200, 255)},
-				['False'] = {['Toggle Background'] = Color3.fromRGB(210, 230, 245), ['Toggle Value'] = Color3.fromRGB(230, 240, 250)}
-			},
-			['Color Picker'] = {
-				['Background'] = Color3.fromRGB(230, 240, 250),
-				['Color Select'] = {['Background'] = Color3.fromRGB(220, 230, 245), ['UIStroke'] = Color3.fromRGB(40, 60, 80)}
-			}
-		}
-    },
 	Dark = {
 		['Shadow'] = Color3.fromRGB(15, 15, 15),
 		['Background'] = Color3.fromRGB(20, 20, 20),
@@ -4682,8 +4621,20 @@ function Library:Window(p)
 		local ThemeDrop = addDropdownSelect(DropdownValue_1, DropdownValue_1, false, CallTheme, Theme, themes.index)
 
 		Close_1.MouseButton1Click:Connect(function()
+			Tabs:Dialog({
+				Title = "Do you want to <font color='#FF0000'>close</font> the ui?",
+				Button1 = {
+					Title = 'Confirm',
+					Color = Color3.fromRGB(0, 188, 0),
+					Callback = function()
 						ScreenGui:Destroy()
 					end,
+				},
+				Button2 = {
+					Title = 'Cancel',
+					Color = Color3.fromRGB(226, 39, 6),
+				}
+			})
 		end)
 
 		do
