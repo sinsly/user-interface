@@ -1437,7 +1437,7 @@ function LYNX:Init(library)
 		Library.lib.Size = isMobile and UDim2.new(0, 543,0, 321) or UDim2.new(0, 715, 0, 575)
 		local shadow = WINDOW:FindFirstChild("Shadow")
 		if shadow then
-			shadow.Visible = not isMobile 
+			shadow.Visible = false
 		end
 	end
 
