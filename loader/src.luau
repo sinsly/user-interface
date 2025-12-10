@@ -1312,8 +1312,8 @@ function Fatality:CreateOption(OptionButton: ImageButton): Elements
 	ExtElementFrame.BorderSizePixel = 0
 	ExtElementFrame.ClipsDescendants = true
 	ExtElementFrame.Position = UDim2.new(2, 0, 2, 0)
-	ExtElementFrame.Size = UDim2.new(0, 200, 0, 0)
-	ExtElementFrame.ZIndex = 100
+	ExtElementFrame.Size = UDim2.new(0, 150, 0, 0)
+	ExtElementFrame.ZIndex = 80
 
 	UICorner.CornerRadius = UDim.new(0, 2)
 	UICorner.Parent = ExtElementFrame
