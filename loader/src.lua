@@ -1143,7 +1143,18 @@ do
 		Library.Enabled = true
 
 
-		LOADER:Destroy()
+local TweenService = game:GetService("TweenService")
+
+local shrinkTween = TweenService:Create(
+    LOADER,
+    TweenInfo.new(0.35, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+    { Size = UDim2.new(0,0,0,0), Position = UDim2.new(0.5,0,0.5,0) }
+)
+
+shrinkTween:Play()
+shrinkTween.Completed:Wait()
+LOADER:Destroy()
+
 
 	end
 
