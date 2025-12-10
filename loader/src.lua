@@ -1130,17 +1130,11 @@ do
 			tweenservice:Create( LOADER.load.Salt.ImageLabel, TweenInfo.new(0.65, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
 		end
 
-		local TimeTillLoad = 5
+		local TimeTillLoad = 1.1
 
-		while TimeTillLoad > 0 do
-			LOADER.load.info.TimeTill.Text = string.format("%.2f", TimeTillLoad) 
-			task.wait(0.01) 
-			TimeTillLoad -= 0.01 
-		end
+		LOADER.load.info.TimeTill.Text = 'v.1.01'
 
-		LOADER.load.info.TimeTill.Text = '0.00'
-
-		task.wait(TimeTillLoad)
+		wait(1.1)
 
 		initLoader()
 		task.wait(0.08)
