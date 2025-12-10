@@ -289,7 +289,7 @@ Fatality.FontSemiBold = Font.new('rbxasset://fonts/families/GothamSSm.json',Enum
 Fatality.Flags = {};
 Fatality.Colors = {
 	Black = Color3.fromRGB(16, 16, 16),
-	Main = Color3.fromRGB(255, 106, 133)
+	Main = Color3.fromRGB(88, 101, 242)
 };
 Fatality.DragBlacklist = {};
 Fatality.Version = '1.6';
