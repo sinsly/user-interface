@@ -1134,11 +1134,11 @@ do
 
 		LOADER.load.info.TimeTill.Text = 'v.1.01'
 
-		wait(0.8)
+		wait(0.5)
 
 		initLoader()
 		load()
-		task.wait(2)
+		task.wait(1.7)
 
 		Library.Enabled = true
 
