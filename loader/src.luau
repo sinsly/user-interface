@@ -5817,6 +5817,7 @@ function Fatality.new(Window: Window)
 		SearchButton.Position = UDim2.new(0, 10, 0.5, 0)
 		SearchButton.Size = UDim2.new(0, 16, 0, 16)
 		SearchButton.ZIndex = 4
+		SearchButton.Visible = false
 		SearchButton.Image = "rbxassetid://10734943674"
 		SearchButton.ImageTransparency = 0.500
 
