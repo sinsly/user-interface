@@ -5806,7 +5806,7 @@ function Fatality.new(Window: Window)
 		InfoButton.ZIndex = 4
 		InfoButton.Visible = false
 		InfoButton.Image = "rbxassetid://10723415903"
-		InfoButton.ImageTransparency = 0.500
+		InfoButton.ImageTransparency = 1
 
 		SearchButton.Name = Fatality:RandomString()
 		SearchButton.Parent = Bottom
@@ -5820,7 +5820,7 @@ function Fatality.new(Window: Window)
 		SearchButton.ZIndex = 4
 		SearchButton.Visible = false
 		SearchButton.Image = "rbxassetid://10734943674"
-		SearchButton.ImageTransparency = 0.500
+		SearchButton.ImageTransparency = 1
 
 		SaveButton.Name = Fatality:RandomString()
 		SaveButton.Parent = Bottom
@@ -5834,16 +5834,16 @@ function Fatality.new(Window: Window)
 		SaveButton.ZIndex = 4
 		SaveButton.Visible = false
 		SaveButton.Image = "rbxassetid://10734941499"
-		SaveButton.ImageTransparency = 0.500
+		SaveButton.ImageTransparency = 1
 
 		Fatality:CreateHover(SaveButton,function(bool)
 			if bool then
 				Fatality:CreateAnimation(SaveButton,0.5,{
-					ImageTransparency = 0.1
+					ImageTransparency = 1
 				})
 			else
 				Fatality:CreateAnimation(SaveButton,0.5,{
-					ImageTransparency = 0.5
+					ImageTransparency = 1
 				})
 			end	
 		end);
@@ -5851,11 +5851,11 @@ function Fatality.new(Window: Window)
 		Fatality:CreateHover(InfoButton,function(bool)
 			if bool then
 				Fatality:CreateAnimation(InfoButton,0.5,{
-					ImageTransparency = 0.1
+					ImageTransparency = 1
 				})
 			else
 				Fatality:CreateAnimation(InfoButton,0.5,{
-					ImageTransparency = 0.5
+					ImageTransparency = 1
 				})
 			end	
 		end);
