@@ -1134,10 +1134,9 @@ do
 
 		LOADER.load.info.TimeTill.Text = 'v.1.01'
 
-		wait(1.1)
+		wait(0.8)
 
 		initLoader()
-		task.wait(0.08)
 		load()
 		task.wait(2)
 
