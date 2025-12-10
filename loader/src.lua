@@ -902,7 +902,7 @@ do
 		end
 
 		local statusColors = {
-			Active = { Color = Color3.fromRGB(25, 229, 22), Text = '<font color="#24bf48">Active</font>' },
+			Active = { Color = Color3.fromRGB(88, 101, 242), Text = '<font color="#5865F2">Active</font>' },
 			Unstable = { Color = Color3.fromRGB(227, 229, 81), Text = '<font color="#e3e551">Unstable</font>' },
 			Detected = { Color = Color3.fromRGB(229, 44, 47), Text = '<font color="#e52c2f">Detected</font>' },
 			Patched = { Color = Color3.fromRGB(229, 44, 47), Text = '<font color="#e52c2f">Patched</font>' }
