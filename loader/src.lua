@@ -24,7 +24,7 @@ local Library =         game:GetObjects("rbxassetid://123800669522471")[1]
 Library.Enabled = false
 local loaded = false
 
-local syde = {
+local LYNX = {
 
 	theme = {
 		['Accent'] = Color3.fromRGB(255, 255, 255);
@@ -35,9 +35,9 @@ local syde = {
 	Connections = {};
 	Comms = Instance.new('BindableEvent');
 	ParentOverride = nil;
-	Build = 'SY3';
+	Build = 'LYNX';
 	ConfigEnabled = false;
-	ConfigFolder = 'Syde';
+	ConfigFolder = 'LYNX';
 	ConfigFile = 'Config';
 	Flags = {};
 	SettingsFlags = {};
@@ -45,7 +45,7 @@ local syde = {
 
 
 -- [ THEME MANAGEMENT ]
-function syde:UpdateTheme(Config)
+function LYNX:UpdateTheme(Config)
 	if type(Config) ~= "table" then
 		warn("[UpdateTheme] Invalid configuration table")
 		return
@@ -79,7 +79,7 @@ function syde:UpdateTheme(Config)
 	end
 end
 
-function syde:DeepMerge(target, source)
+function LYNX:DeepMerge(target, source)
 	for k, v in pairs(source) do
 		if type(v) == "table" and type(target[k]) == "table" then
 			self:DeepMerge(target[k], v) 
@@ -91,7 +91,7 @@ end
 
 -- [UTILITIES]
 
-function syde:getdark(Color, val, mode)
+function LYNX:getdark(Color, val, mode)
 	if typeof(Color) ~= "Color3" or type(val) ~= "number" then
 		warn("[getdark] Invalid input: Expected (Color3, number)")
 		return Color
@@ -110,7 +110,7 @@ function syde:getdark(Color, val, mode)
 	return Color3.fromHSV(H, S, V)
 end
 
-function syde:HidePlaceHolder(instance, placeholder, recursive)
+function LYNX:HidePlaceHolder(instance, placeholder, recursive)
 	if typeof(instance) ~= "Instance" or type(placeholder) ~= "string" then
 		warn("[removeplaceholder] Invalid input: Expected (Instance, string)")
 		return
@@ -139,7 +139,7 @@ function syde:HidePlaceHolder(instance, placeholder, recursive)
 	end
 end
 
-function syde:AddConnection(Type, Callback)
+function LYNX:AddConnection(Type, Callback)
 	if typeof(Type) ~= "RBXScriptSignal" then
 		error("[AddConnection] Invalid Type: Expected RBXScriptSignal, got " .. typeof(Type))
 	end
@@ -150,17 +150,17 @@ function syde:AddConnection(Type, Callback)
 	local Connection = Type:Connect(Callback)
 	local ConnectionData = { Connection = Connection }
 
-	syde.Connections = syde.Connections or {}
-	table.insert(syde.Connections, ConnectionData)
+	LYNX.Connections = LYNX.Connections or {}
+	table.insert(LYNX.Connections, ConnectionData)
 
 	local function Disconnect()
 		if Connection.Connected then
 			Connection:Disconnect()
 		end
 
-		for i = #syde.Connections, 1, -1 do
-			if syde.Connections[i] == ConnectionData then
-				table.remove(syde.Connections, i)
+		for i = #LYNX.Connections, 1, -1 do
+			if LYNX.Connections[i] == ConnectionData then
+				table.remove(LYNX.Connections, i)
 				break
 			end
 		end
@@ -168,9 +168,9 @@ function syde:AddConnection(Type, Callback)
 
 	task.spawn(function()
 		task.wait(10)
-		for i = #syde.Connections, 1, -1 do
-			if not syde.Connections[i].Connection.Connected then
-				table.remove(syde.Connections, i)
+		for i = #LYNX.Connections, 1, -1 do
+			if not LYNX.Connections[i].Connection.Connected then
+				table.remove(LYNX.Connections, i)
 			end
 		end
 	end)
@@ -178,7 +178,7 @@ function syde:AddConnection(Type, Callback)
 	return Connection, Disconnect
 end
 
-function syde:MakeResizable(Dragger, Object, MinSize, Callback, LockAspectRatio)
+function LYNX:MakeResizable(Dragger, Object, MinSize, Callback, LockAspectRatio)
 	assert(typeof(Dragger) == "Instance" and Dragger:IsA("GuiObject"), "[MakeResizable] Dragger must be a GuiObject")
 	assert(typeof(Object) == "Instance" and Object:IsA("GuiObject"), "[MakeResizable] Object must be a GuiObject")
 	assert(typeof(MinSize) == "Vector2", "[MakeResizable] MinSize must be a Vector2")
@@ -246,14 +246,14 @@ function syde:MakeResizable(Dragger, Object, MinSize, Callback, LockAspectRatio)
 		end
 	end
 
-	syde:AddConnection(Dragger.InputBegan, onInputBegan)
-	syde:AddConnection(userInput.InputChanged, onInputChanged)
-	syde:AddConnection(Dragger.InputEnded, onInputEnded)
+	LYNX:AddConnection(Dragger.InputBegan, onInputBegan)
+	LYNX:AddConnection(userInput.InputChanged, onInputChanged)
+	LYNX:AddConnection(Dragger.InputEnded, onInputEnded)
 end
 
 local loadTweens = {}
 
-function syde:registerLoadTween(object, properties, initialState, tweenInfo)
+function LYNX:registerLoadTween(object, properties, initialState, tweenInfo)
 	assert(typeof(object) == "Instance", "[registerLoadTween] Object must be an Instance")
 	assert(typeof(properties) == "table", "[registerLoadTween] Properties must be a table")
 	assert(typeof(initialState) == "table", "[registerLoadTween] Initial state must be a table")
@@ -267,7 +267,7 @@ function syde:registerLoadTween(object, properties, initialState, tweenInfo)
 	}
 end
 
-function syde:resetToInitialState(animated, resetTweenInfo)
+function LYNX:resetToInitialState(animated, resetTweenInfo)
 	for object, tweenData in pairs(loadTweens) do
 		if object and object.Parent then
 			tweenData.tween:Cancel()
@@ -286,8 +286,8 @@ function syde:resetToInitialState(animated, resetTweenInfo)
 	end
 end
 
-function syde:replayLoadTweens(targetObject)
-	syde:resetToInitialState(false)
+function LYNX:replayLoadTweens(targetObject)
+	LYNX:resetToInitialState(false)
 
 	for object, tweenData in pairs(loadTweens) do
 		if object and object.Parent then
@@ -299,14 +299,14 @@ function syde:replayLoadTweens(targetObject)
 	end
 end
 
-function syde:removeLoadTween(object)
+function LYNX:removeLoadTween(object)
 	if loadTweens[object] then
 		loadTweens[object].tween:Cancel()
 		loadTweens[object] = nil
 	end
 end
 
-function syde:ColorPack(color)
+function LYNX:ColorPack(color)
 	assert(typeof(color) == "Color3", "PackColor expects a Color3 value.")
 
 	-- Convert to RGB integer values
@@ -317,7 +317,7 @@ function syde:ColorPack(color)
 	}
 end
 
-function syde:ColorUnpack(color)
+function LYNX:ColorUnpack(color)
 	assert(type(color) == "table" or type(color) == "string", "Invalid color format. Expected table (RGB) or string (HEX).")
 
 	if type(color) == "table" then
@@ -336,7 +336,7 @@ end
 
 
 
-function syde:updateLayout(container, spacing)
+function LYNX:updateLayout(container, spacing)
 	spacing = spacing or 5
 	local yOffset = 0
 	local containerWidth = container.AbsoluteSize.X 
@@ -365,7 +365,7 @@ end
 local dragSpeed = 0.6
 local LockToScreen = false
 
-function syde:AddDrag(Object, Main, ConstrainToParent)
+function LYNX:AddDrag(Object, Main, ConstrainToParent)
 	assert(typeof(Object) == "Instance" and Object:IsA("GuiObject"), "[AddDrag] Object must be a GuiObject")
 	assert(typeof(Main) == "Instance" and Main:IsA("GuiObject"), "[AddDrag] Main must be a GuiObject")
 
@@ -410,7 +410,7 @@ function syde:AddDrag(Object, Main, ConstrainToParent)
 
 
 
-	syde:AddConnection(Object.InputBegan, function(input)
+	LYNX:AddConnection(Object.InputBegan, function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
 			startMousePos = getInputPos(input)
@@ -425,7 +425,7 @@ function syde:AddDrag(Object, Main, ConstrainToParent)
 	end)
 
 
-	syde:AddConnection(userInput.InputChanged, function(input)
+	LYNX:AddConnection(userInput.InputChanged, function(input)
 		if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
 			local currentMousePos = getInputPos(input)
 			if currentMousePos and startMousePos then
@@ -441,7 +441,7 @@ function syde:AddDrag(Object, Main, ConstrainToParent)
 		end
 	end)
 
-	syde:AddConnection(Object.InputEnded, function(input)
+	LYNX:AddConnection(Object.InputEnded, function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = false
 		end
@@ -473,7 +473,7 @@ end
 
 local activeModals = 0 -- track how many modals are currently open
 
-function syde:Modal(Modal)
+function LYNX:Modal(Modal)
 	task.spawn(function()
 		local ModalData = {
 			Title = Modal.Title;
@@ -583,7 +583,7 @@ function syde:Modal(Modal)
 	end)
 end
 
-function syde:Notify(Notification)
+function LYNX:Notify(Notification)
 	task.spawn(function()
 
 		local NotifData = {
@@ -660,27 +660,27 @@ end
 --[LOADER INIALIZE]
 do
 
-	function syde:Load(Config)
-		print('Syde 〡 Loader Loaded')
+	function LYNX:Load(Config)
+		print('LYNX 〡 Loader Loaded')
 		local LOADER = Loader
 		LOADER.Enabled = true
 		LOADER.Parent = coregui
 
 		-- PreLoad
-		Config.Name = Config.Name or 'Syde™'
+		Config.Name = Config.Name or 'LYNX™'
 		Config.Logo = Config.Logo or 'rbxassetid://14554547135'
-		Config.ConfigFolder = Config.ConfigFolder or 'syde'
+		Config.ConfigFolder = Config.ConfigFolder or 'LYNX'
 		Config.Status = Config.Status or false
-		Config.Accent = Config.Accent or syde.theme.Accent
-		Config.HitBox = Config.HitBox or syde.theme.HitBox
+		Config.Accent = Config.Accent or LYNX.theme.Accent
+		Config.HitBox = Config.HitBox or LYNX.theme.HitBox
 
 		local LoaderConfig = {
 			Name = Config.Name;
 			Logo = 'rbxassetid://'..Config.Logo;
 			ConfigFolder = Config.ConfigFolder;
 			Status = Config.Status;
-			Accent = Config.Accent or syde.theme.Accent;
-			Hitbox = Config.HitBox or syde.theme.HitBox;
+			Accent = Config.Accent or LYNX.theme.Accent;
+			Hitbox = Config.HitBox or LYNX.theme.HitBox;
 			Socials = {}
 		}
 
@@ -711,10 +711,10 @@ do
 			LOADER.load.Size = UDim2.new(0, 400, 0, 360)
 			LOADER.load.social.Visible = true
 
-			syde:HidePlaceHolder(LOADER.load.social.largeblock, 'largesocial')
-			syde:HidePlaceHolder(LOADER.load.social, 'little')
-			syde:HidePlaceHolder(LOADER.load.social.little, 'smallblock1')
-			syde:HidePlaceHolder(LOADER.load.social.little, 'smallblock2')
+			LYNX:HidePlaceHolder(LOADER.load.social.largeblock, 'largesocial')
+			LYNX:HidePlaceHolder(LOADER.load.social, 'little')
+			LYNX:HidePlaceHolder(LOADER.load.social.little, 'smallblock1')
+			LYNX:HidePlaceHolder(LOADER.load.social.little, 'smallblock2')
 
 			for _, social in ipairs(Config.Socials) do
 				table.insert(LoaderConfig.Socials, {
@@ -737,7 +737,7 @@ do
 			end
 
 			if largeCount > 1 or smallCount > 2 then
-				warn("[SYDE] Only 1 Large block and 2 Small blocks are allowed in Socials.")
+				warn("[LYNX] Only 1 Large block and 2 Small blocks are allowed in Socials.")
 				LoaderConfig.Socials = nil
 			else
 				for _, social in ipairs(LoaderConfig.Socials) do
@@ -892,9 +892,9 @@ do
 
 
 		LOADER.load.logo.Image = LoaderConfig.Logo;
-		syde.theme.Accent = Config.Accent;
-		syde.theme.HitBox = Config.HitBox;
-		LOADER.load.info.build.Text = syde.Build
+		LYNX.theme.Accent = Config.Accent;
+		LYNX.theme.HitBox = Config.HitBox;
+		LOADER.load.info.build.Text = LYNX.Build
 
 		if LoaderConfig.Status == false then
 			LOADER.load.logo.stroke.UIStroke.Color = Color3.fromRGB(24, 24, 24)
@@ -941,13 +941,13 @@ do
 			TweenWorkLabel(1,'rbxassetid://136002400178503', 'Verifying Configuration...')
 
 			if Config.ConfigurationSaving and Config.ConfigurationSaving.Enabled then
-				local folderName = Config.ConfigurationSaving.FolderName or "SydeSec"
+				local folderName = Config.ConfigurationSaving.FolderName or "LYNXSec"
 				local fileName = Config.ConfigurationSaving.FileName or "default_config"
 				local fullPath = folderName .. "/" .. fileName .. ".lua"
 
-				syde.ConfigEnabled = true
-				syde.ConfigFolder = folderName  
-				syde.ConfigFile = fileName     
+				LYNX.ConfigEnabled = true
+				LYNX.ConfigFolder = folderName  
+				LYNX.ConfigFile = fileName     
 
 				-- Ensure folder exists
 				if isfolder and not isfolder(folderName) then
@@ -955,7 +955,7 @@ do
 						makefolder(folderName)
 					end)
 					if not success then
-						warn("Syde 〡 Failed to create folder:", err)
+						warn("LYNX 〡 Failed to create folder:", err)
 					end
 				end
 
@@ -969,15 +969,15 @@ do
 				end)
 
 				if not success then
-					warn("Syde 〡 File write/read blocked or failed:", err)
+					warn("LYNX 〡 File write/read blocked or failed:", err)
 				end
 			end
 
 
 			TweenWorkLabel(1,'rbxassetid://105810189969774', 'Cleaning Things Up...')
-			local UI_TAG = "sydeUILoader"
-			local MARKER_NAME = "SYDEUIDetector"
-			local INTERNAL_UUID = ("SYDE-" .. tostring(game.JobId):gsub("-", "") .. tostring(tick())):gsub("%.", "")
+			local UI_TAG = "LYNXUILoader"
+			local MARKER_NAME = "LYNXUIDetector"
+			local INTERNAL_UUID = ("LYNX-" .. tostring(game.JobId):gsub("-", "") .. tostring(tick())):gsub("%.", "")
 			local PROTECTION_EVENT = Instance.new("BindableEvent")
 			local HttpService = game:GetService("HttpService")
 
@@ -999,7 +999,7 @@ do
 			end)
 
 			if not successLibrary or not Library then
-				warn("Syde 〡 Failed to load Library.")
+				warn("LYNX 〡 Failed to load Library.")
 				return
 			end
 
@@ -1020,7 +1020,7 @@ do
 				while Library and Library.Parent do
 					task.wait(1)
 					if Library.Parent ~= coregui then
-						warn("Syde 〡 UI moved. Restoring...")
+						warn("LYNX 〡 UI moved. Restoring...")
 						pcall(function()
 							Library.Parent = coregui
 						end)
@@ -1034,7 +1034,7 @@ do
 					task.wait(2)
 				end
 
-				warn("Syde 〡 UI removed. Reinjection in progress...")
+				warn("LYNX 〡 UI removed. Reinjection in progress...")
 				local success, lib = pcall(function()
 					return Library -- Replace with GetObjects if needed
 				end)
@@ -1055,12 +1055,12 @@ do
 
 			if Config.AutoJoinDiscord and Config.AutoJoinDiscord.Enabled then
 				local discordConfig = Config.AutoJoinDiscord
-				local rootFolder = Config.ConfigurationSaving and Config.ConfigurationSaving.FolderName or "SydeSec"
+				local rootFolder = Config.ConfigurationSaving and Config.ConfigurationSaving.FolderName or "LYNXSec"
 				local discordFolder = rootFolder .. "/DiscordInvites"
 				local inviteCode = discordConfig.Invite
 				local inviteFilePath = discordFolder .. "/" .. inviteCode .. ".txt"
 
-				warn("Syde 〡 Discord AutoJoin enabled. Preparing to send invite:", inviteCode)
+				warn("LYNX 〡 Discord AutoJoin enabled. Preparing to send invite:", inviteCode)
 
 				-- Ensure folder exists
 				if isfolder and not isfolder(discordFolder) then
@@ -1068,15 +1068,15 @@ do
 						makefolder(discordFolder)
 					end)
 					if folderSuccess then
-						print("Syde 〡 Created DiscordInvites folder at:", discordFolder)
+						print("LYNX 〡 Created DiscordInvites folder at:", discordFolder)
 					else
-						warn("Syde 〡 Failed to create DiscordInvites folder:", folderErr)
+						warn("LYNX 〡 Failed to create DiscordInvites folder:", folderErr)
 					end
 				end
 
 				local shouldPrompt = true
 				if isfile and discordConfig.RememberJoins and isfile(inviteFilePath) then
-					print("Syde 〡 Discord invite '" .. inviteCode .. "' already joined. Skipping prompt.")
+					print("LYNX 〡 Discord invite '" .. inviteCode .. "' already joined. Skipping prompt.")
 					shouldPrompt = false
 				end
 
@@ -1101,12 +1101,12 @@ do
 						end)
 
 						if reqSuccess then
-							print("Syde 〡 Discord invite sent successfully to:", inviteCode)
+							print("LYNX 〡 Discord invite sent successfully to:", inviteCode)
 						else
-							warn("Syde 〡 Failed to send Discord invite:", reqErr)
+							warn("LYNX 〡 Failed to send Discord invite:", reqErr)
 						end
 					else
-						warn("Syde 〡 Request function not available — cannot send Discord invite.")
+						warn("LYNX 〡 Request function not available — cannot send Discord invite.")
 					end
 
 					if discordConfig.RememberJoins then
@@ -1115,9 +1115,9 @@ do
 						end)
 
 						if writeSuccess then
-							print("Syde 〡 Logged Discord invite join for:", inviteCode)
+							print("LYNX 〡 Logged Discord invite join for:", inviteCode)
 						else
-							warn("Syde 〡 Failed to write join log for invite:", writeErr)
+							warn("LYNX 〡 Failed to write join log for invite:", writeErr)
 						end
 					end
 				end
@@ -1160,16 +1160,16 @@ function LoadConfig(Configuration)
 	local Data = https:JSONDecode(Configuration)
 	local changed = false
 
-	for FlagName, Flag in pairs(syde.Flags) do
+	for FlagName, Flag in pairs(LYNX.Flags) do
 		local FlagValue = Data[FlagName]
 
 		if FlagValue ~= nil then
 			task.spawn(function()
 
 				if Flag.Set then
-					Flag:Set(Flag.Type == "ColorPicker" and syde:ColorUnpack(FlagValue) or FlagValue)
+					Flag:Set(Flag.Type == "ColorPicker" and LYNX:ColorUnpack(FlagValue) or FlagValue)
 				elseif Flag.Type == "ColorPicker" and Flag.Color then
-					Flag.Color = syde:ColorUnpack(FlagValue)
+					Flag.Color = LYNX:ColorUnpack(FlagValue)
 					changed = true
 				elseif Flag.Value ~= nil then
 					Flag.Value = FlagValue
@@ -1177,7 +1177,7 @@ function LoadConfig(Configuration)
 				elseif Flag.StarterValue then
 					Flag.StarterValue = FlagValue
 				else
-					warn("Syde 〡 Unsupported flag type or missing setter for flag: " .. FlagName)
+					warn("LYNX 〡 Unsupported flag type or missing setter for flag: " .. FlagName)
 				end
 			end)
 		end
@@ -1189,12 +1189,12 @@ end
 
 
 function SaveConfig()
-	if not syde.ConfigEnabled then return end
+	if not LYNX.ConfigEnabled then return end
 
 	local Data = {}
-	for i, v in pairs(syde.Flags) do
+	for i, v in pairs(LYNX.Flags) do
 		if v.Type == "ColorPicker" then
-			Data[i] = syde:ColorPack(v.Color)
+			Data[i] = LYNX:ColorPack(v.Color)
 		else
 			Data[i] = v.Value or v.Color or v.StarterValue or false
 		end
@@ -1202,7 +1202,7 @@ function SaveConfig()
 
 	-- Save configuration to file
 	if writefile then
-		local filePath = string.format("%s/%s.lua", syde.ConfigFolder, syde.ConfigFile)
+		local filePath = string.format("%s/%s.lua", LYNX.ConfigFolder, LYNX.ConfigFile)
 		writefile(filePath, https:JSONEncode(Data))
 	end
 end
@@ -1273,7 +1273,7 @@ function CloseUI()
 	tweenservice:Create(WINDOW.UserInfo.ConnectionStatus.Status.TextLabel, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 1 }):Play()
 	task.wait(0.8)
 	if UIClosed == true then
-		syde:Notify({
+		LYNX:Notify({
 			Title = 'UI Is Closed',
 			Content = 'Use '.. UIToggle.Name ..' To Open Back.'
 		})
@@ -1333,20 +1333,20 @@ end
 
 
 -- [Remove PlaceHolders]
-syde:HidePlaceHolder(TABS, 'Tb')
-syde:HidePlaceHolder(PAGES, 'Page')
+LYNX:HidePlaceHolder(TABS, 'Tb')
+LYNX:HidePlaceHolder(PAGES, 'Page')
 
 
 --[INITIALIZATION]
 
-function syde:Init(library)
+function LYNX:Init(library)
 
 	Library.Enabled = true
 
 	if loaded == false then
 		local UI_TAG = "LYNXUILoader"
 		local MARKER_NAME = "LYNXIDetector"
-		local INTERNAL_UUID = ("SYDE-" .. tostring(game.JobId):gsub("-", "") .. tostring(tick())):gsub("%.", "")
+		local INTERNAL_UUID = ("LYNX-" .. tostring(game.JobId):gsub("-", "") .. tostring(tick())):gsub("%.", "")
 		local PROTECTION_EVENT = Instance.new("BindableEvent")
 		local HttpService = game:GetService("HttpService")
 
@@ -1368,7 +1368,7 @@ function syde:Init(library)
 		end)
 
 		if not successLibrary or not Library then
-			warn("Syde 〡 Failed to load Library.")
+			warn("LYNX 〡 Failed to load Library.")
 			return
 		end
 
@@ -1389,7 +1389,7 @@ function syde:Init(library)
 			while Library and Library.Parent do
 				task.wait(1)
 				if Library.Parent ~= coregui then
-					warn("Syde 〡 UI moved. Restoring...")
+					warn("LYNX 〡 UI moved. Restoring...")
 					pcall(function()
 						Library.Parent = coregui
 					end)
@@ -1403,7 +1403,7 @@ function syde:Init(library)
 				task.wait(2)
 			end
 
-			warn("Syde 〡 UI removed. Reinjection in progress...")
+			warn("LYNX 〡 UI removed. Reinjection in progress...")
 			local success, lib = pcall(function()
 				return Library -- Replace with GetObjects if needed
 			end)
@@ -1425,7 +1425,7 @@ function syde:Init(library)
 	tweenservice:Create(game.Workspace.Camera, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), { FieldOfView  = 70 }):Play()
 
 	local Data = {
-		Title = library.Title or "Syde",
+		Title = library.Title or "LYNX",
 		SubText = library.SubText or "Google",
 	}
 
@@ -1434,8 +1434,8 @@ function syde:Init(library)
 	TOPBAR.Title.Sub.Text = Data.SubText
 
 	-- [Setup Dragging & Resizing]
-	syde:AddDrag(TOPBAR, WINDOW, true)
-	syde:MakeResizable(WINDOW.resize, WINDOW, Vector2.new(654, 428))
+	LYNX:AddDrag(TOPBAR, WINDOW, true)
+	LYNX:MakeResizable(WINDOW.resize, WINDOW, Vector2.new(654, 428))
 
 	-- [Initial Transparency Setup]
 	TOPBAR.Title.TextTransparency = 1
@@ -1469,7 +1469,7 @@ function syde:Init(library)
 	camera:GetPropertyChangedSignal("ViewportSize"):Connect(updateLayout)
 	userinput:GetPropertyChangedSignal("TouchEnabled"):Connect(updateLayout)
 
-	-- Syde Connection (Coming Soon)
+	-- LYNX Connection (Coming Soon)
 	SetUserInfo()
 
 	if not UserInfoDisabled then
@@ -1581,7 +1581,7 @@ function syde:Init(library)
 	end)
 
 	WINDOW.Top.UHolder.Util.Close.interact.MouseButton1Click:Connect(function()
-		syde:Modal({
+		LYNX:Modal({
 			Title = 'Please Confirm Below.',
 			Content = 'Are You Sure You Want To Close This UI?',
 			ConfimCallBack = function()
@@ -1632,7 +1632,7 @@ function syde:Init(library)
 		end
 	end
 	
-	syde:AddConnection(syde.Comms.Event, function(p, color)
+	LYNX:AddConnection(LYNX.Comms.Event, function(p, color)
 		if p == 'DropShadow' then
 			WINDOW.Shadow.ImageLabel.ImageColor3 = color
 		end
@@ -2347,7 +2347,7 @@ function syde:Init(library)
 
 				local SV, HUE = nil, nil
 
-				syde:AddConnection(SVPicker.InputBegan, function(input)
+				LYNX:AddConnection(SVPicker.InputBegan, function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						SV = runservice.RenderStepped:Connect(function()
 							local mouse = game.Players.LocalPlayer:GetMouse()
@@ -2362,7 +2362,7 @@ function syde:Init(library)
 					end
 				end)
 
-				syde:AddConnection(SVPicker.InputEnded, function(i)
+				LYNX:AddConnection(SVPicker.InputEnded, function(i)
 					if i.UserInputType == Enum.UserInputType.MouseButton1 and SV then
 						SV:Disconnect()
 						SV = nil
@@ -2370,7 +2370,7 @@ function syde:Init(library)
 					end
 				end)
 
-				syde:AddConnection(HUESlider.InputBegan, function(input)
+				LYNX:AddConnection(HUESlider.InputBegan, function(input)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 then
 						HUE = runservice.RenderStepped:Connect(function()
 							local mouse = game.Players.LocalPlayer:GetMouse()
@@ -2383,7 +2383,7 @@ function syde:Init(library)
 					end
 				end)
 
-				syde:AddConnection(HUESlider.InputEnded, function(i)
+				LYNX:AddConnection(HUESlider.InputEnded, function(i)
 					if i.UserInputType == Enum.UserInputType.MouseButton1 and HUE then
 						HUE:Disconnect()
 						HUE = nil
@@ -2581,7 +2581,7 @@ function syde:Init(library)
 				end
 
 				if ColorPickerData.SFlag then
-					syde.SettingsFlags[ColorPickerData.SFlag] = ColorPickerData
+					LYNX.SettingsFlags[ColorPickerData.SFlag] = ColorPickerData
 				end
 
 				colorpicker.color.Values.Rainbow.MouseButton1Click:Connect(ToggleRainbowEffect)
@@ -2774,15 +2774,15 @@ function syde:Init(library)
 						end
 					end)
 
-		--[[Slider.slide.slideframe.BackgroundColor3 = syde.theme.HitBox
-		Slider.slide.slideframe.shadowHolder.ambientShadow.ImageColor3 = syde.theme.HitBox
-		Slider.slide.slideframe.shadowHolder.penumbraShadow.ImageColor3 = syde.theme.HitBox
-		Slider.slide.slideframe.shadowHolder.umbraShadow.ImageColor3 = syde.theme.HitBox]]
+		--[[Slider.slide.slideframe.BackgroundColor3 = LYNX.theme.HitBox
+		Slider.slide.slideframe.shadowHolder.ambientShadow.ImageColor3 = LYNX.theme.HitBox
+		Slider.slide.slideframe.shadowHolder.penumbraShadow.ImageColor3 = LYNX.theme.HitBox
+		Slider.slide.slideframe.shadowHolder.umbraShadow.ImageColor3 = LYNX.theme.HitBox]]
 					slider.slideholder.Size = UDim2.new(1,-30,0,slider.slideholder.UIListLayout.AbsoluteContentSize.Y)
 					local ss = slider.slideholder.UIListLayout.AbsoluteContentSize.Y
 					slider.Size = UDim2.new(1,-15,0, ss  + 20)
 
-		--[[syde:AddConnection(syde.Comms.Event, function(p, color)
+		--[[LYNX:AddConnection(LYNX.Comms.Event, function(p, color)
 			if p == 'HitBox' then
 				Slider.slide.slideframe.BackgroundColor3 = color
 				Slider.slide.slideframe.shadowHolder.ambientShadow.ImageColor3 = color
@@ -2804,7 +2804,7 @@ function syde:Init(library)
 						)
 
 						-- Register load tween
-						syde:registerLoadTween(
+						LYNX:registerLoadTween(
 							Slider.slide.slideframe,
 							{Size = UDim2.new(sliderPosition, 0, 1, 0)},
 							{Size = UDim2.new(0, 100, 1, 0)},
@@ -2831,7 +2831,7 @@ function syde:Init(library)
 					end
 
 					if Options.SFlag then
-						syde.SettingsFlags[Options.SFlag] = Options
+						LYNX.SettingsFlags[Options.SFlag] = Options
 					end
 
 				end
@@ -3009,7 +3009,7 @@ function syde:Init(library)
 				local fadeTween = TweenInfo.new(0.57, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
 				local function UpdateToggleUI(state)
-					local targetColor = state and syde.theme.HitBox or Color3.fromRGB(20, 20, 20)
+					local targetColor = state and LYNX.theme.HitBox or Color3.fromRGB(20, 20, 20)
 					local strokeTransparency = state and 1 or 0
 					local checkTransparency = state and 0 or 1
 					local gradientTransparency = state and 0 or 1
@@ -3259,7 +3259,7 @@ function syde:Init(library)
 				end
 
 				if ToggleData.SFlag then
-					syde.SettingsFlags[ToggleData.SFlag] = ToggleData
+					LYNX.SettingsFlags[ToggleData.SFlag] = ToggleData
 				end
 
 			end
@@ -3275,9 +3275,9 @@ function syde:Init(library)
 		element:ColorPicker({
 			Title = 'Accent',
 			Linkable = true,
-			Color = syde.theme.Accent;
+			Color = LYNX.theme.Accent;
 			CallBack = function(v)
-				syde:UpdateTheme({
+				LYNX:UpdateTheme({
 					['Accent'] = v
 				})
 			end,
@@ -3288,9 +3288,9 @@ function syde:Init(library)
 		element:ColorPicker({
 			Title = 'HitBox',
 			Linkable = true,
-			Color = syde.theme.HitBox;
+			Color = LYNX.theme.HitBox;
 			CallBack = function(c)
-				syde:UpdateTheme({
+				LYNX:UpdateTheme({
 					['HitBox'] = c
 				})
 			end,
@@ -3300,9 +3300,9 @@ function syde:Init(library)
 		element:ColorPicker({
 			Title = 'Drop Shadow',
 			Linkable = true,
-			Color = syde.theme.DropShadow;
+			Color = LYNX.theme.DropShadow;
 			CallBack = function(c)
-				syde:UpdateTheme({
+				LYNX:UpdateTheme({
 					['DropShadow'] = c
 				})
 			end,
@@ -3363,14 +3363,14 @@ function syde:Init(library)
 		}, WINDOW.Settings.Pages.Theme.Container)
 
 
-		function syde:SaveSettingsConfig()
+		function LYNX:SaveSettingsConfig()
 			local Data = {}
 
 
-			for flag, v in pairs(syde.SettingsFlags or {}) do
+			for flag, v in pairs(LYNX.SettingsFlags or {}) do
 
 				if v.Type == "ColorPicker" and v.Color then
-					Data[flag] = syde:ColorPack(v.Color)
+					Data[flag] = LYNX:ColorPack(v.Color)
 				elseif v.Value ~= nil then
 					Data[flag] = v.Value
 				elseif v.StarterValue ~= nil then
@@ -3381,23 +3381,23 @@ function syde:Init(library)
 			end
 
 
-			local path = string.format("%s/SettingsConfig.lua", syde.ConfigFolder)
+			local path = string.format("%s/SettingsConfig.lua", LYNX.ConfigFolder)
 			local encoded = https:JSONEncode(Data)
 
 			writefile(path, encoded)
 
-			syde:Notify({
+			LYNX:Notify({
 				Title = 'Settings Saved',
 				Content = 'Your settings have been saved to SettingsConfig.lua',
 				Duration = 3,
 			})
 		end
 
-		function syde:LoadSettingsConfig()
-			local path = string.format("%s/SettingsConfig.lua", syde.ConfigFolder)
+		function LYNX:LoadSettingsConfig()
+			local path = string.format("%s/SettingsConfig.lua", LYNX.ConfigFolder)
 
 			if not isfile(path) then
-				syde:Notify({
+				LYNX:Notify({
 					Title = 'No Settings Found',
 					Content = 'SettingsConfig.lua does not exist.',
 					Duration = 3,
@@ -3415,12 +3415,12 @@ function syde:Init(library)
 			end
 
 			for flag, val in pairs(data) do
-				local setting = syde.SettingsFlags and syde.SettingsFlags[flag]
+				local setting = LYNX.SettingsFlags and LYNX.SettingsFlags[flag]
 				if setting then
 					if setting.Set then
 						setting:Set(val)
 					elseif setting.Type == "ColorPicker" and setting.Color then
-						setting.Color = syde:ColorUnpack(val)
+						setting.Color = LYNX:ColorUnpack(val)
 					elseif setting.Value ~= nil then
 						setting.Value = val
 					end
@@ -3429,7 +3429,7 @@ function syde:Init(library)
 				end
 			end
 
-			syde:Notify({
+			LYNX:Notify({
 				Title = 'Settings Loaded',
 				Content = 'Loaded settings from SettingsConfig.lua.',
 				Duration = 3,
@@ -3440,7 +3440,7 @@ function syde:Init(library)
 			Title = 'Save',
 			Description = "Saves Setting Configuration",
 			CallBack = function(v)
-				syde:SaveSettingsConfig()
+				LYNX:SaveSettingsConfig()
 			end,
 		},  WINDOW.Settings.Pages.Theme.Container)
 
@@ -3448,7 +3448,7 @@ function syde:Init(library)
 			Title = 'Load',
 			Description = "Loads Setting Configuration",
 			CallBack = function()
-				syde:LoadSettingsConfig()
+				LYNX:LoadSettingsConfig()
 			end,
 		}, WINDOW.Settings.Pages.Theme.Container)
 
@@ -3574,23 +3574,23 @@ function syde:Init(library)
 
 		Page.ChildAdded:Connect(function(child)
 			child:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				syde:updateLayout(Page, 7) 
+				LYNX:updateLayout(Page, 7) 
 			end)
 			child:GetPropertyChangedSignal("Visible"):Connect(function()
-				syde:updateLayout(Page, 7)
+				LYNX:updateLayout(Page, 7)
 			end)
-			syde:updateLayout(Page, 7)
+			LYNX:updateLayout(Page, 7)
 		end)
 
 		Page.ChildRemoved:Connect(function()
-			syde:updateLayout(Page, 7)
+			LYNX:updateLayout(Page, 7)
 		end)
 
 		Page:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			syde:updateLayout(Page, 7)
+			LYNX:updateLayout(Page, 7)
 		end)
 
-		syde:updateLayout(Page, 7)
+		LYNX:updateLayout(Page, 7)
 
 		local function ChangeName(Name)
 			tweenservice:Create(PAGES.Clipframe.TBName, TweenInfo.new(0), { TextTransparency = PAGES.Clipframe.TBName.TextTransparency }):Play()
@@ -3633,7 +3633,7 @@ function syde:Init(library)
 			ldata.first = TabData.Title
 			tweenservice:Create(Tab.Title, TweenInfo.new(2, Enum.EasingStyle.Quint), { Size = UDim2.new(1, -10, 1, 0) }):Play()
 			tweenservice:Create(Tab.Title, TweenInfo.new(2, Enum.EasingStyle.Exponential), { TextTransparency = 0 }):Play()
-			tweenservice:Create(Tab.indicator, TweenInfo.new(2, Enum.EasingStyle.Exponential), { BackgroundColor3 = syde.theme.Accent }):Play()
+			tweenservice:Create(Tab.indicator, TweenInfo.new(2, Enum.EasingStyle.Exponential), { BackgroundColor3 = LYNX.theme.Accent }):Play()
 			tweenservice:Create(Tab.indicator, TweenInfo.new(2, Enum.EasingStyle.Quint), { Size = UDim2.new(0, 2, 0, 2) }):Play()
 			tweenservice:Create(Tab.indicator.ImageLabel, TweenInfo.new(1, Enum.EasingStyle.Exponential), { ImageTransparency = 0.6 }):Play()
 		end
@@ -3645,7 +3645,7 @@ function syde:Init(library)
 			local targetSize = isSelected and UDim2.new(1, -12, 1, 0) or UDim2.new(1, -12, 1, 0)
 			local targetTextColor = isSelected and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(52, 52, 52)
 			local targetTransparency = isSelected and 0 or 1
-			local targetColor = isSelected and syde.theme.Accent or Color3.fromRGB(29, 29, 29)
+			local targetColor = isSelected and LYNX.theme.Accent or Color3.fromRGB(29, 29, 29)
 			local indicatorSize = isSelected and UDim2.new(0, 2, 0, 10) or UDim2.new(0, 2, 0, 5)
 
 			tweenservice:Create(tabButton.Title, positionTweenInfo, { Size = targetSize, TextColor3 = targetTextColor }):Play()
@@ -3822,7 +3822,7 @@ function syde:Init(library)
 				end
 			end
 
-			syde:replayLoadTweens()
+			LYNX:replayLoadTweens()
 
 			for _, otherTab in ipairs(TABS:GetChildren()) do
 				if otherTab:IsA("Frame") then
@@ -4239,7 +4239,7 @@ function syde:Init(library)
 			local fadeTween = TweenInfo.new(0.57, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
 
 			local function UpdateToggleUI(state)
-				local targetColor = state and syde.theme.HitBox or Color3.fromRGB(28, 28, 28)
+				local targetColor = state and LYNX.theme.HitBox or Color3.fromRGB(28, 28, 28)
 				local strokeTransparency = state and 1 or 0
 				local checkTransparency = state and 0 or 1
 				local gradientTransparency = state and 0 or 1
@@ -4496,14 +4496,14 @@ function syde:Init(library)
 				SaveConfig()
 			end
 
-			if syde.ConfigEnabled then
+			if LYNX.ConfigEnabled then
 				if ToggleData.Flag then
-					syde.Flags[ToggleData.Flag] = ToggleData
+					LYNX.Flags[ToggleData.Flag] = ToggleData
 				end
 			end
 
 
-			syde:AddConnection(syde.Comms.Event, function(p, color)
+			LYNX:AddConnection(LYNX.Comms.Event, function(p, color)
 				if p == 'HitBox' then
 					if ToggleData.Value then
 						toggle.tog.BackgroundColor3 = color
@@ -4564,14 +4564,14 @@ function syde:Init(library)
 				--	Slider.slide.slideframe:TweenSize(UDim2.new(SliderPosition, 0, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, 0.5, true)
 				tweenservice:Create(Slider.slide.slideframe, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {Size = UDim2.new(SliderPosition, 0, 1, 0)})
 
-				syde:registerLoadTween(
+				LYNX:registerLoadTween(
 					Slider.slide.slideframe,
 					{Size = UDim2.new(SliderPosition, 0, 1, 0)},
 					{Size = UDim2.new(0, 100,1, 0)},
 					TweenInfo.new(0.85, Enum.EasingStyle.Quint)
 				)
 
-				--	syde:replayLoadTweens(Slider.slide.slideframe)
+				--	LYNX:replayLoadTweens(Slider.slide.slideframe)
 
 				Slider.v.Text = string.format("<font size='14'>%d</font><font color='#434343'>/%d</font>", Options.StarterValue, Options.Range[2])
 
@@ -4590,7 +4590,7 @@ function syde:Init(library)
 						local snapPosition = (newValue - Options.Range[1]) / range
 						Slider.slide.slideframe:TweenSize(UDim2.new(snapPosition, 0, 1, 0), Enum.EasingDirection.Out, Enum.EasingStyle.Quint, 0.55, true)
 
-						syde:registerLoadTween(
+						LYNX:registerLoadTween(
 							Slider.slide.slideframe,
 							{Size = UDim2.new(snapPosition, 0, 1, 0)},
 							{Size = UDim2.new(0, 100,1, 0)},
@@ -4624,7 +4624,7 @@ function syde:Init(library)
 					dragging = false
 				end)
 
-				syde:AddConnection(userinput.InputEnded, function(input, processed)
+				LYNX:AddConnection(userinput.InputEnded, function(input, processed)
 					if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch  then
 						dragging = false
 						if Slider and Slider:FindFirstChild("Title") then
@@ -4633,21 +4633,21 @@ function syde:Init(library)
 					end
 				end)
 
-				syde:AddConnection(userinput.InputChanged, function(input)
+				LYNX:AddConnection(userinput.InputChanged, function(input)
 					if dragging and input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch  then
 						UpdateSlider(input.Position.X)
 					end
 				end)
 
-				Slider.slide.slideframe.BackgroundColor3 = syde.theme.HitBox
-				Slider.slide.slideframe.shadowHolder.ambientShadow.ImageColor3 = syde.theme.HitBox
-				Slider.slide.slideframe.shadowHolder.penumbraShadow.ImageColor3 = syde.theme.HitBox
-				Slider.slide.slideframe.shadowHolder.umbraShadow.ImageColor3 = syde.theme.HitBox
+				Slider.slide.slideframe.BackgroundColor3 = LYNX.theme.HitBox
+				Slider.slide.slideframe.shadowHolder.ambientShadow.ImageColor3 = LYNX.theme.HitBox
+				Slider.slide.slideframe.shadowHolder.penumbraShadow.ImageColor3 = LYNX.theme.HitBox
+				Slider.slide.slideframe.shadowHolder.umbraShadow.ImageColor3 = LYNX.theme.HitBox
 				slider.slideholder.Size = UDim2.new(1,-30,0,slider.slideholder.UIListLayout.AbsoluteContentSize.Y)
 				local ss = slider.slideholder.UIListLayout.AbsoluteContentSize.Y
 				slider.Size = UDim2.new(1,-15,0, ss  + 20)
 
-				syde:AddConnection(syde.Comms.Event, function(p, color)
+				LYNX:AddConnection(LYNX.Comms.Event, function(p, color)
 					if p == 'HitBox' then
 						Slider.slide.slideframe.BackgroundColor3 = color
 						Slider.slide.slideframe.shadowHolder.ambientShadow.ImageColor3 = color
@@ -4669,7 +4669,7 @@ function syde:Init(library)
 					)
 
 					-- Register load tween
-					syde:registerLoadTween(
+					LYNX:registerLoadTween(
 						Slider.slide.slideframe,
 						{Size = UDim2.new(sliderPosition, 0, 1, 0)},
 						{Size = UDim2.new(0, 100, 1, 0)},
@@ -4696,9 +4696,9 @@ function syde:Init(library)
 					SaveConfig()
 				end
 
-				if syde.ConfigEnabled then
+				if LYNX.ConfigEnabled then
 					if Options.Flag then
-						syde.Flags[Options.Flag] = Options
+						LYNX.Flags[Options.Flag] = Options
 					end
 				end
 
@@ -5450,7 +5450,7 @@ function syde:Init(library)
 
 			local SV, HUE = nil, nil
 
-			syde:AddConnection(SVPicker.InputBegan, function(input)
+			LYNX:AddConnection(SVPicker.InputBegan, function(input)
 				if input.UserInputType == Enum.UserInputType.MouseButton1 then
 					SV = runservice.RenderStepped:Connect(function()
 						local mouse = game.Players.LocalPlayer:GetMouse()
@@ -5465,7 +5465,7 @@ function syde:Init(library)
 				end
 			end)
 
-			syde:AddConnection(SVPicker.InputEnded, function(i)
+			LYNX:AddConnection(SVPicker.InputEnded, function(i)
 				if i.UserInputType == Enum.UserInputType.MouseButton1 and SV then
 					SV:Disconnect()
 					SV = nil
@@ -5474,7 +5474,7 @@ function syde:Init(library)
 				end
 			end)
 
-			syde:AddConnection(HUESlider.InputBegan, function(input)
+			LYNX:AddConnection(HUESlider.InputBegan, function(input)
 				if input.UserInputType == Enum.UserInputType.MouseButton1 then
 					HUE = runservice.RenderStepped:Connect(function()
 						local mouse = game.Players.LocalPlayer:GetMouse()
@@ -5487,7 +5487,7 @@ function syde:Init(library)
 				end
 			end)
 
-			syde:AddConnection(HUESlider.InputEnded, function(i)
+			LYNX:AddConnection(HUESlider.InputEnded, function(i)
 				if i.UserInputType == Enum.UserInputType.MouseButton1 and HUE then
 					HUE:Disconnect()
 					HUE = nil
@@ -5680,9 +5680,9 @@ function syde:Init(library)
 				SaveConfig()
 			end
 
-			if syde.ConfigEnabled then
+			if LYNX.ConfigEnabled then
 				if ColorPickerData.Flag then
-					syde.Flags[ColorPickerData.Flag] = ColorPickerData
+					LYNX.Flags[ColorPickerData.Flag] = ColorPickerData
 				end
 			end
 
@@ -5732,7 +5732,7 @@ function syde:Init(library)
 			end
 
 			-- Main input handler
-			syde:AddConnection(userinput.InputBegan, function(input)
+			LYNX:AddConnection(userinput.InputBegan, function(input)
 				if input.UserInputType ~= Enum.UserInputType.Keyboard then return end
 
 				if KeybindData.WaitingForKey then
@@ -6207,27 +6207,27 @@ function syde:Init(library)
 
 		end
 
-		function syde:LoadSaveConfig()
+		function LYNX:LoadSaveConfig()
 			local notified = false
 			local loaded = false
 
-			if syde.ConfigEnabled then
+			if LYNX.ConfigEnabled then
 				local success, result = pcall(function()
-					local filePath = string.format("%s/%s.lua", syde.ConfigFolder, syde.ConfigFile)
+					local filePath = string.format("%s/%s.lua", LYNX.ConfigFolder, LYNX.ConfigFile)
 					if isfile and isfile(filePath) then
 						loaded = LoadConfig(readfile(filePath))
 					end
 				end)
 
 				if success then
-					syde:Notify{
+					LYNX:Notify{
 						Title = 'Loaded Save File',
 						Content = 'Configuration loaded successfully from Save File.',
 						Duration = 3,
 					}
 					print("Configuration loaded successfully from a previous session.")
 				elseif not success then
-					warn("Syde Configurations Error 〡 " .. tostring(result))
+					warn("LYNX Configurations Error 〡 " .. tostring(result))
 				end
 			end
 		end
@@ -6239,7 +6239,7 @@ function syde:Init(library)
 	return ldata
 
 end
-return syde
+return LYNX
 
 
 
