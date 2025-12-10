@@ -5804,6 +5804,7 @@ function Fatality.new(Window: Window)
 		InfoButton.Position = UDim2.new(1, -5, 0.5, 0)
 		InfoButton.Size = UDim2.new(0, 16, 0, 16)
 		InfoButton.ZIndex = 4
+		InfoButton.Visible = false
 		InfoButton.Image = "rbxassetid://10723415903"
 		InfoButton.ImageTransparency = 0.500
 
@@ -5831,6 +5832,7 @@ function Fatality.new(Window: Window)
 		SaveButton.Position = UDim2.new(0, 35, 0.5, 0)
 		SaveButton.Size = UDim2.new(0, 16, 0, 16)
 		SaveButton.ZIndex = 4
+		SaveButton.Visible = false
 		SaveButton.Image = "rbxassetid://10734941499"
 		SaveButton.ImageTransparency = 0.500
 
