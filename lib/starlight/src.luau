@@ -2711,8 +2711,8 @@ function Starlight:CreateWindow(WindowSettings)
 			"rbxassetid://16423157073", -- close
 			"rbxassetid://123097456061373", -- minimise
 			"rbxassetid://114684871091583", -- maximise
-			"rbxassetid://6034304908", -- notification
-			"rbxassetid://8445471332", -- search
+			"rbxassetid://", -- notification
+			"rbxassetid://", -- search
 			"rbxassetid://92421933997743", -- Corner Repair
 			"rbxassetid://80990588449079", -- loading circle
 		}, function(asset)
