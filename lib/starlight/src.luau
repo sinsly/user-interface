@@ -8870,7 +8870,7 @@ function Starlight:CreateWindow(WindowSettings)
 
 				instance:CreateToggle({
 					Name = "Acrylic",
-					CurrentValue = false,
+					CurrentValue = true,
 					Tooltip = "Enables The Glass And Acrylic Style for the main UI",
 					Icon = 6031371068,
 					Callback = function(v)
